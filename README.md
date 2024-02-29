@@ -6,7 +6,7 @@ App Name: BiblioCat
 Version: 1.0
 Developer: 
 Aaron Fortner – afortner@islander.tamucc.edu
-Pu Huang – pu.huang@.tamucc.edu
+Pu Huang – pu.huang@tamucc.edu
 
 
 
