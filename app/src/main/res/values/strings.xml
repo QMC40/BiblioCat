@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">BiblioCat</string>
+    <string name="bibliocat">BiblioCat</string>
+    <string name="book_counter">book counter</string>
+    <string name="add_books">Add Books</string>
+    <string name="my_books">My Books</string>
+    <string name="my_collection">My Collection</string>
+    <string name="outside_my_collection">Outside my Collection</string>
+    <string name="share">Share Collection</string>
+    <string name="bookshelf">Bookshelf</string>
+    <string name="whatAmIReading">What am I reading?</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="find_books">Find a book</string>
+    <string name="what_i_read">what I read</string>
 </resources>

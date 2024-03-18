@@ -20,14 +20,26 @@ empowers users to optimize their reading experiences.
 
 
 Features:
-Feature 1: Book counter on the top will remind you the exact number of your book collection.
-Feature 2: Search book to see your and your friends' book collection
-Feature 3: In "My books", import or share books with friends.
+Feature 1: Book counter on the top will remind you the exact number of books in your collection.
+Feature 2: Search a book title to see if it is in yours or your friends' book collection
+Feature 3: In "Bookshelf", view your collection.
+Feature 4: Keep a wishlist of titles you are interested in.
+Feature 5: Share your collection catalog with friends locally or over the internet to find
+readers with similar tastes and share your collections.
+Feature 6: Track your reading history and what you are currently reading.
 How to Use:
 Installation:
 
 Download the app from the Google Play Store.
 Open the app after installation.
+
+Use:
+entering a title or author in the search bar will search your catalog and the catalogs shared with your for books that fit the search information on a separate page (inoperative)
+on the opening page there are buttons to add books to the catalog, view the collection, add a title to the wishlist, share the collection data with others and a journaling functionality to track current reading and past history. 
+
+all of these buttons are non-functional for this prototype and will open new screens to perform the associated tasks.
+
+Below the button field will be a display of recently accessed titles in a scrolling view window but this is not currently implemented.
 
 Troubleshooting:
 App Crashing:
