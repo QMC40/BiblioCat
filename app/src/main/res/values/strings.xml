@@ -12,4 +12,23 @@
     <string name="wishlist">Wishlist</string>
     <string name="find_books">Find a book</string>
     <string name="what_i_read">what I read</string>
+    <string name="cute_kat_sorting_books">cute kat sorting books</string>
+    <string name="enter_book_manually">Manual add</string>
+    <string name="scan_cover">Scan Book Cover</string>
+    <string name="search_online">Search Online</string>
+    <string name="scan_barcode">Scan Barcode</string>
+    <string name="title">Book Title</string>
+    <string name="author">Book Author</string>
+    <string name="isbn">Book ISBN</string>
+    <string name="publisher">Book Publisher</string>
+    <string name="edition">Book Edition</string>
+    <string name="pages">Number of pages</string>
+    <string name="genre">Book Genre</string>
+    <string name="year">Publication Year</string>
+    <string name="price">Price Paid</string>
+    <string name="add_book">Add Book</string>
+    <plurals name="book_count_format">
+        <item quantity="one">%1$d book in collection</item>
+        <item quantity="other">%1$d books in collection</item>
+    </plurals>
 </resources>

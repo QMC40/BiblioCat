@@ -11,7 +11,7 @@ Pu Huang – pu.huang@tamucc.edu
 
 
 Overview:
-f you are an avid book collector with a potentially diverse and expansive collection, a user-friendly
+If you are an avid book collector with a potentially diverse and expansive collection, a user-friendly
 method of tracking and sharing that collection with other book lovers with an accessible interface is 
 called for. BiblioCat addresses this challenge head-on by offering Android users a comprehensive 
 solution for managing, organizing, and exploring their libraries. By seamlessly integrating features such 
