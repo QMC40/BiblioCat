@@ -27,6 +27,8 @@
     <string name="year">Publication Year</string>
     <string name="price">Price Paid</string>
     <string name="add_book">Add Book</string>
+    <string name="delete">Delete book</string>
+    <string name="edit">Edit</string>
     <plurals name="book_count_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>

@@ -33,12 +33,12 @@ class BookDbHelper(context: Context?) :
     }
 
     fun getBooksCount(): Int {
-    val db = this.readableDatabase
-    val cursor = db.rawQuery("SELECT * FROM books", null)
-    val count = cursor.count
-    cursor.close()
-    return count
-}
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM books", null)
+        val count = cursor.count
+        cursor.close()
+        return count
+    }
 
     fun addBook(book: Book) {
         val db = this.writableDatabase
@@ -54,5 +54,30 @@ class BookDbHelper(context: Context?) :
         values.put("price", book.price)
         db.insert("books", null, values)
         db.close()
+    }
+
+    fun getAllBooks(): List<Book> {
+        val bookList = ArrayList<Book>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM books", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val book = Book(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("author")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("isbn")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("publisher")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("edition")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("pages")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("genre")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("year")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("price"))
+                )
+                bookList.add(book)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return bookList
     }
 }

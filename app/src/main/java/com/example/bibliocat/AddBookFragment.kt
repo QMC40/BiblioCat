@@ -1,11 +1,14 @@
 package com.example.bibliocat
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class AddBookFragment : Fragment() {
@@ -31,6 +34,7 @@ class AddBookFragment : Fragment() {
         val priceEditText = view.findViewById<EditText>(R.id.priceEditText)
 
         val addButton = view.findViewById<Button>(R.id.addButton)
+
         addButton.setOnClickListener {
             val book = Book(
                 title = titleEditText.text.toString(),
@@ -44,8 +48,17 @@ class AddBookFragment : Fragment() {
                 price = priceEditText.text.toString()
             )
             dbHelper.addBook(book)
+            Toast.makeText(context, "Book has been added to the collection", Toast.LENGTH_SHORT)
+                .show()
+
+            // Hide the keyboard
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         return view
     }
+
 }

@@ -1,12 +1,14 @@
+@file:Suppress("unused")
+
 package com.example.bibliocat
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,6 +53,14 @@ class MainActivity : AppCompatActivity() {
         whatAmIReadingBtn.setOnClickListener {
             openWhatAmIReadingActivity(it)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val count = dbHelper.getBooksCount()
+        val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
+        countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
     }
 
     fun openAddBooksActivity(view: View) {
