@@ -13,7 +13,7 @@
         android:id="@+id/bookCounterTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="center"
         android:text="@string/book_counter"
         android:textSize="30sp" />
 
@@ -25,80 +25,57 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/buttonField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|fill_horizontal|fill_vertical"
-        android:background="@color/dark_blue"
+        style="@style/ButtonFieldStyle"
+        android:layout_gravity="center"
         app:columnOrderPreserved="true"
         app:columnCount="2"
         app:rowCount="3">
 
         <Button
             android:id="@+id/addBooksBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
-            android:gravity="center|center_vertical"
+            style="@style/ButtonStyle1"
             android:onClick="openAddBooksActivity"
             android:text="@string/add_books"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            app:layout_gravity="center|fill_horizontal"
             app:layout_column="0"
-            app:layout_row="0" />
+            app:layout_row="0"
+            app:layout_gravity="center" />
 
         <Button
             android:id="@+id/bookshelf"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
-            android:gravity="center_horizontal|center_vertical"
+            style="@style/ButtonStyle1"
             android:onClick="openBookshelfActivity"
             android:text="@string/bookshelf"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            app:layout_gravity="center|fill_horizontal"
             app:layout_column="1"
-            app:layout_row="0" />
+            app:layout_row="0"
+            app:layout_gravity="center" />
 
         <Button
             android:id="@+id/shareBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
+            style="@style/ButtonStyle1"
             android:onClick="openShareActivity"
             android:text="@string/share"
             app:layout_column="1"
-            app:layout_gravity="center|fill_horizontal"
-            app:layout_row="1" />
+            app:layout_row="1"
+            app:layout_gravity="center" />
 
         <Button
             android:id="@+id/wishlistBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
+            style="@style/ButtonStyle1"
             android:onClick="openWishlistActivity"
             android:text="@string/wishlist"
             app:layout_column="0"
-            app:layout_gravity="center|fill_horizontal" />
+            app:layout_row="1"
+            app:layout_gravity="center" />
 
         <Button
             android:id="@+id/whatAmIReadingBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/dark_green"
+            style="@style/ButtonStyle1"
             android:onClick="openWhatAmIReadingActivity"
             android:text="@string/whatAmIReading"
             app:layout_column="0"
             app:layout_columnSpan="2"
-            app:layout_gravity="center|fill_horizontal"
-            app:layout_row="2" />
+            app:layout_row="2"
+            app:layout_gravity="center" />
 
     </androidx.gridlayout.widget.GridLayout>
 
@@ -107,8 +84,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:src="@drawable/cutekat"
-        android:contentDescription="@string/cute_kat_sorting_books" />
+        android:contentDescription="@string/cute_kat_sorting_books"
+        android:src="@drawable/cutekat" />
 
 
 </LinearLayout>

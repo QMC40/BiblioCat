@@ -13,7 +13,7 @@
         android:id="@+id/bookCounterTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="center"
         android:text="@string/book_counter"
         android:textSize="30sp" />
 
@@ -25,66 +25,45 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/buttonField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|fill_horizontal|fill_vertical"
-        android:background="@color/dark_blue"
+        style="@style/ButtonFieldStyle"
         app:columnOrderPreserved="true"
         app:columnCount="2"
         app:rowCount="2">
 
         <Button
             android:id="@+id/enterBookManuallyBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
-            android:gravity="center|center_vertical"
+            style="@style/ButtonStyle1"
             android:onClick="enterBookManually"
             android:text="@string/enter_book_manually"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            app:layout_gravity="center|fill_horizontal"
+            app:layout_gravity="center"
             app:layout_column="0"
             app:layout_row="0" />
 
         <Button
             android:id="@+id/scanCoverBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
-            android:gravity="center_horizontal|center_vertical"
+            style="@style/ButtonStyle1"
             android:onClick="scanCover"
             android:text="@string/scan_cover"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            app:layout_gravity="center|fill_horizontal"
+            app:layout_gravity="center"
             app:layout_column="1"
             app:layout_row="0" />
 
         <Button
             android:id="@+id/searchOnlineBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
+            style="@style/ButtonStyle1"
             android:onClick="searchOnline"
             android:text="@string/search_online"
+            app:layout_gravity="center"
             app:layout_column="0"
-            app:layout_gravity="center|fill_horizontal"
             app:layout_row="1" />
 
         <Button
             android:id="@+id/scanBarcodeBtn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_green"
+            style="@style/ButtonStyle1"
             android:onClick="scanBarcode"
             android:text="@string/scan_barcode"
+            app:layout_gravity="center"
             app:layout_column="1"
-            app:layout_gravity="center|fill_horizontal"
             app:layout_row="1" />
 
     </androidx.gridlayout.widget.GridLayout>
