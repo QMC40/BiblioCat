@@ -13,19 +13,25 @@
         android:theme="@style/Theme.BiblioCat"
         tools:targetApi="31">
         <activity
-            android:name="AddBooksActivity"
+            android:name=".AddBooksActivity"
             android:exported="false" />
         <activity
-            android:name="BookshelfActivity"
+            android:name=".BookshelfActivity"
             android:exported="false" />
         <activity
-            android:name="ShareActivity"
+            android:name=".EditBookActivity"
             android:exported="false" />
         <activity
-            android:name="WhatAmIReadingActivity"
+            android:name=".ShareActivity"
             android:exported="false" />
         <activity
-            android:name="WishlistActivity"
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WhatAmIReadingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WishlistActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

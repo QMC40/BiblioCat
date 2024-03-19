@@ -1,5 +1,6 @@
 package com.example.bibliocat
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,13 +36,12 @@ class BookAdapter(var bookList: List<Book>) :
             bookList = dbHelper.getAllBooks()
             notifyDataSetChanged()
         }
+        holder.editButton.setOnClickListener {
+            val intent = Intent(holder.itemView.context, EditBookActivity::class.java)
+            intent.putExtra("bookId", book.id)
+            holder.itemView.context.startActivity(intent)
+        }
     }
-
-//    holder.editButton.setOnClickListener {
-//        val intent = Intent(holder.itemView.context, EditBookActivity::class.java)
-//        intent.putExtra("bookId", book.id)
-//        holder.itemView.context.startActivity(intent)
-//    }
 
     override fun getItemCount() = bookList.size
 }

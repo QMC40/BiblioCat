@@ -87,4 +87,42 @@ class BookDbHelper(context: Context?) :
         return bookList
     }
 
+    fun getBook(bookId: Int): Book {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM books WHERE id = ?", arrayOf(bookId.toString()))
+        cursor?.moveToFirst()
+        val book = Book(
+            cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+            cursor.getString(cursor.getColumnIndexOrThrow("title")),
+            cursor.getString(cursor.getColumnIndexOrThrow("author")),
+            cursor.getString(cursor.getColumnIndexOrThrow("isbn")),
+            cursor.getString(cursor.getColumnIndexOrThrow("publisher")),
+            cursor.getString(cursor.getColumnIndexOrThrow("edition")),
+            cursor.getString(cursor.getColumnIndexOrThrow("pages")),
+            cursor.getString(cursor.getColumnIndexOrThrow("genre")),
+            cursor.getString(cursor.getColumnIndexOrThrow("year")),
+            cursor.getString(cursor.getColumnIndexOrThrow("price"))
+        )
+        cursor.close()
+        return book
+
+    }
+
+    fun updateBook(updatedBook: Book) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put("title", updatedBook.title)
+        values.put("author", updatedBook.author)
+        values.put("isbn", updatedBook.isbn)
+        values.put("publisher", updatedBook.publisher)
+        values.put("edition", updatedBook.edition)
+        values.put("pages", updatedBook.pages)
+        values.put("genre", updatedBook.genre)
+        values.put("year", updatedBook.year)
+        values.put("price", updatedBook.price)
+        db.update("books", values, "id = ?", arrayOf(updatedBook.id.toString()))
+        db.close()
+
+    }
+
 }
