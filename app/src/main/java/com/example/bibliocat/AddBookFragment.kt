@@ -51,6 +51,9 @@ class AddBookFragment : Fragment() {
             Toast.makeText(context, "Book has been added to the collection", Toast.LENGTH_SHORT)
                 .show()
 
+            // Update the counter in the AddBooksActivity
+            (addButton.context as AddBooksActivity).updateCounter()
+
             // Hide the keyboard
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
