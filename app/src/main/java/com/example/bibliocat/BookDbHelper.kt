@@ -56,6 +56,12 @@ class BookDbHelper(context: Context?) :
         db.close()
     }
 
+    fun deleteBook(id: Int) {
+        val db = this.writableDatabase
+        db.delete("books", "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
     fun getAllBooks(): List<Book> {
         val bookList = ArrayList<Book>()
         val db = this.readableDatabase
@@ -80,4 +86,5 @@ class BookDbHelper(context: Context?) :
         cursor.close()
         return bookList
     }
+
 }

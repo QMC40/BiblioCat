@@ -13,6 +13,8 @@ class BookAdapter(var bookList: List<Book>) :
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
         val isbnTextView: TextView = itemView.findViewById(R.id.isbnTextView)
+        val deleteButton: View = itemView.findViewById(R.id.deleteButton)
+        val editButton: View = itemView.findViewById(R.id.editButton)
         // Add more TextViews for other book details as needed
     }
 
@@ -27,6 +29,12 @@ class BookAdapter(var bookList: List<Book>) :
         holder.authorTextView.text = book.author
         holder.isbnTextView.text = book.isbn
         // Set text for other TextViews as needed
+        holder.deleteButton.setOnClickListener {
+            val dbHelper = BookDbHelper(holder.itemView.context)
+            dbHelper.deleteBook(book.id)
+            bookList = dbHelper.getAllBooks()
+            notifyDataSetChanged()
+        }
     }
 
 //    holder.editButton.setOnClickListener {
