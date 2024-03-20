@@ -87,5 +87,4 @@
         android:contentDescription="@string/cute_kat_sorting_books"
         android:src="@drawable/cutekat" />
 
-
 </LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ButtonStyle1" parent="android:attr/buttonBarButtonStyle">
+    <style name="ButtonStyle1">
         <item name="android:textColor">#6703F4</item>
         <item name="android:background">@drawable/oval_button</item>
         <item name="android:layout_width">wrap_content</item>
@@ -10,7 +10,7 @@
         <item name="android:padding">10dp</item>
     </style>
 
-    <style name="ButtonFieldStyle" parent="android:attr/buttonBarButtonStyle">
+    <style name="ButtonFieldStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>

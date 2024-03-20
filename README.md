@@ -8,7 +8,7 @@ Developer:
 Aaron Fortner – afortner@islander.tamucc.edu
 Pu Huang – pu.huang@tamucc.edu
 
-Taskings for production of the vertical prototype:
+Tasking for production of the vertical prototype:
 Pu Huang:
 •	Designed the initial UI forms for the add book and bookshelf functionality by producing XML layout files for the various activities and fragments implemented for this demonstration.
 •	Drafted this document implementing corrections from horizontal prototype feedback and documentation relevant to this prototype.
