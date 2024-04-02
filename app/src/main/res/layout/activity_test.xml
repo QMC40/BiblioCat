@@ -35,7 +35,6 @@
             android:inputType="text"
             tools:ignore="Autofill" />
 
-        <!-- Add other EditText fields as needed -->
 
         <Button
             android:id="@+id/thisButton"

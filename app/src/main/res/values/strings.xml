@@ -30,6 +30,8 @@
     <string name="delete">Delete book</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
+    <string name="add_a_book_to_wishlist">add a book to the wishlist</string>
+    <string name="wishlist_toggle">Wishlist?</string>
     <plurals name="book_count_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>

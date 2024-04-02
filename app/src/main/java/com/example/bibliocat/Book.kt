@@ -10,5 +10,6 @@ data class Book(
     val pages: String = "",
     val genre: String = "",
     val year: String = "",
-    val price: String = ""
+    val price: String = "",
+    val wishlist: Boolean = false
 )

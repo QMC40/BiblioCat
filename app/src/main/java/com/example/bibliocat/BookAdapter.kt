@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -14,13 +15,15 @@ class BookAdapter(var bookList: List<Book>) :
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
         val isbnTextView: TextView = itemView.findViewById(R.id.isbnTextView)
+        val wishList: RadioButton = itemView.findViewById(R.id.wishlistRadioButton)
         val deleteButton: View = itemView.findViewById(R.id.deleteButton)
         val editButton: View = itemView.findViewById(R.id.editButton)
         // Add more TextViews for other book details as needed
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.book_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.book_item, parent, false)
         return BookViewHolder(view)
     }
 
@@ -29,7 +32,12 @@ class BookAdapter(var bookList: List<Book>) :
         holder.titleTextView.text = book.title
         holder.authorTextView.text = book.author
         holder.isbnTextView.text = book.isbn
-        // Set text for other TextViews as needed
+        holder.wishList.isChecked = book.wishlist
+
+        holder.wishList.setOnClickListener {
+            val dbHelper = BookDbHelper(holder.itemView.context)
+            dbHelper.updateWishlist(book.id, holder.wishList.isChecked)
+        }
         holder.deleteButton.setOnClickListener {
             val dbHelper = BookDbHelper(holder.itemView.context)
             dbHelper.deleteBook(book.id)

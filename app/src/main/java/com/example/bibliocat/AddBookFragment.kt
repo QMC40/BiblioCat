@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
@@ -32,8 +33,10 @@ class AddBookFragment : Fragment() {
         val genreEditText = view.findViewById<EditText>(R.id.genreEditText)
         val yearEditText = view.findViewById<EditText>(R.id.yearEditText)
         val priceEditText = view.findViewById<EditText>(R.id.priceEditText)
+        val wishlistRadioButton = view.findViewById<RadioButton>(R.id.wishlistSwitch)
 
         val addButton = view.findViewById<Button>(R.id.addButton)
+
 
         addButton.setOnClickListener {
             val book = Book(
@@ -45,14 +48,15 @@ class AddBookFragment : Fragment() {
                 pages = pagesEditText.text.toString(),
                 genre = genreEditText.text.toString(),
                 year = yearEditText.text.toString(),
-                price = priceEditText.text.toString()
+                price = priceEditText.text.toString(),
+                wishlist = wishlistRadioButton.isChecked
             )
             dbHelper.addBook(book)
             Toast.makeText(context, "Book has been added to the collection", Toast.LENGTH_SHORT)
                 .show()
 
             // Update the counter in the AddBooksActivity
-            (addButton.context as AddBooksActivity).updateCounter()
+            (activity as AddBooksActivity).updateCounter()
 
             // Hide the keyboard
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
