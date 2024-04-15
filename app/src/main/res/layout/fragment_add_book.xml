@@ -1,124 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:padding="16dp">
+
+
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/title"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
+
+            <EditText
+                android:id="@+id/authorEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/author"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:fillViewport="false"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/genreEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/genre"
+                        android:inputType="text"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/isbnEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/isbn"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/publisherEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/publisher"
+                        android:inputType="text"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/editionEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edition"
+                        android:inputType="text"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/pagesEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/pages"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/yearEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/year"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <EditText
+                        android:id="@+id/priceEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/price"
+                        android:inputType="numberDecimal"
+                        android:minHeight="48dp"
+                        android:textColorHint="#546E7A"
+                        tools:ignore="Autofill" />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+    <TextView
+        android:id="@+id/ratingTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:text="@string/rating"
+        android:textColor="#546E7A"
+        android:textSize="18sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:rating="3" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/titleEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/title"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <EditText
-            android:id="@+id/authorEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/author"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <EditText
-            android:id="@+id/isbnEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/isbn"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill"/>
-
-        <EditText
-            android:id="@+id/publisherEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/publisher"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <EditText
-            android:id="@+id/editionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/edition"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <EditText
-            android:id="@+id/pagesEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/pages"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <EditText
-            android:id="@+id/genreEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/genre"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill"/>
-
-        <EditText
-            android:id="@+id/yearEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/year"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <EditText
-            android:id="@+id/priceEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/price"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="Autofill" />
-
-        <RadioButton
-            android:id="@+id/wishlistSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:textColor="#546E7A"
-            android:textSize="18sp"
-            android:text="@string/wishlist_toggle" />
-
-        <Button
-            android:id="@+id/addButton"
+        <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/add_book"
+            android:layout_weight="1" />
+
+        <CheckBox
+            android:id="@+id/readSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:minHeight="48dp"
-            android:textColor="#455A64"
-            tools:ignore="Autofill" />
+            android:text="@string/read"
+            android:textColor="#546E7A"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/wishlistSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:text="@string/wishlist_toggle"
+            android:textColor="#546E7A"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
-</ScrollView>
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:minHeight="48dp"
+        android:text="@string/add_book"
+        android:textColor="#455A64"
+        tools:ignore="Autofill" />
+
+
+</LinearLayout>

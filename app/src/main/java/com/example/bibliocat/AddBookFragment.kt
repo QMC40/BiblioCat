@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.RadioButton
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
@@ -33,8 +34,9 @@ class AddBookFragment : Fragment() {
         val genreEditText = view.findViewById<EditText>(R.id.genreEditText)
         val yearEditText = view.findViewById<EditText>(R.id.yearEditText)
         val priceEditText = view.findViewById<EditText>(R.id.priceEditText)
-        val wishlistRadioButton = view.findViewById<RadioButton>(R.id.wishlistSwitch)
-
+        val wishlistCheckBox = view.findViewById<CheckBox>(R.id.wishlistSwitch)
+        val readCheckBox = view.findViewById<CheckBox>(R.id.readSwitch)
+        val ratingBar = view.findViewById<RatingBar>(R.id.ratingBar)
         val addButton = view.findViewById<Button>(R.id.addButton)
 
 
@@ -54,7 +56,10 @@ class AddBookFragment : Fragment() {
                 genre = genreEditText.text.toString(),
                 year = yearEditText.text.toString(),
                 price = priceEditText.text.toString(),
-                wishlist = wishlistRadioButton.isChecked
+                rating = ratingBar.rating.toDouble(),
+                read = readCheckBox.isChecked,
+                wishlist = wishlistCheckBox.isChecked,
+                coverUrl = ""
             )
             dbHelper.addBook(book)
             Toast.makeText(context, "Book has been added to the collection", Toast.LENGTH_SHORT)

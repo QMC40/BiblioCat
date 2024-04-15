@@ -17,8 +17,8 @@
     <string name="scan_cover">Scan Book Cover</string>
     <string name="search_online">Search Online</string>
     <string name="scan_barcode">Scan Barcode</string>
-    <string name="title">Book Title</string>
-    <string name="author">Book Author</string>
+    <string name="title">Book Title (Required)</string>
+    <string name="author">Book Author(Required)</string>
     <string name="isbn">Book ISBN</string>
     <string name="publisher">Book Publisher</string>
     <string name="edition">Book Edition</string>
@@ -31,7 +31,10 @@
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="add_a_book_to_wishlist">add a book to the wishlist</string>
-    <string name="wishlist_toggle">Wishlist?</string>
+    <string name="wishlist_toggle">Wishlist</string>
+    <string name="book_cover">Book cover</string>
+    <string name="read">Read</string>
+    <string name="rating">Rating</string>
     <plurals name="book_count_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>

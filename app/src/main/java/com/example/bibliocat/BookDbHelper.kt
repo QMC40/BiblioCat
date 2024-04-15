@@ -12,30 +12,37 @@ class BookDbHelper(context: Context?) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS books")
-        onCreate(db)
+
+        db.execSQL("ALTER TABLE books ADD COLUMN " +
+                "rating INTEGER DEFAULT 0 CHECK(rating BETWEEN 0 AND 5)")
+        db.execSQL("ALTER TABLE books ADD COLUMN " +
+                "read BOOLEAN DEFAULT 0 CHECK(read IN (0,1))")
+        db.execSQL("ALTER TABLE books ADD COLUMN coverUrl TEXT")
+//        db.execSQL("DROP TABLE IF EXISTS books")
+//        onCreate(db)
     }
 
     companion object {
         private const val DATABASE_NAME = "bookLibrary.db"
-        private const val DATABASE_VERSION = 6
-        private const val CREATE_TABLE = "CREATE TABLE books (" +
-                "id INTEGER PRIMARY KEY," +
-                "title TEXT," +
-//                "title TEXT NOT NULL," +
-                "author TEXT," +
-//                "author TEXT NOT NULL," +
-                "isbn TEXT," +
-                "publisher TEXT," +
-                "edition TEXT," +
-                "pages TEXT," +
-                "genre TEXT," +
-                "year TEXT," +
-                "price TEXT," +
-//                "read BOOLEAN DEFAULT 0 CHECK(read IN (0,1)),"
-                "wishlist BOOLEAN DEFAULT 0 CHECK(wishlist IN (0,1)))"
+        private const val DATABASE_VERSION = 7
+        // Add more columns as needed
+    private const val CREATE_TABLE = "CREATE TABLE books (" +
+            "id INTEGER PRIMARY KEY," +
+            "title TEXT," +
+            "author TEXT," +
+            "isbn TEXT," +
+            "publisher TEXT," +
+            "edition TEXT," +
+            "pages TEXT," +
+            "genre TEXT," +
+            "year TEXT," +
+            "price TEXT," +
+            "rating INTEGER DEFAULT 0 CHECK(rating BETWEEN 0 AND 5)," +
+            "read BOOLEAN DEFAULT 0 CHECK(read IN (0,1))," +
+            "wishlist BOOLEAN DEFAULT 0 CHECK(wishlist IN (0,1))," +
+            "coverUrl TEXT" +
+            ")"
     }
-
 
     fun getBooksCount(): Int {
         val db = this.readableDatabase
@@ -69,7 +76,10 @@ class BookDbHelper(context: Context?) :
     values.put("genre", book.genre)
     values.put("year", book.year)
     values.put("price", book.price)
+    values.put("rating", book.rating)
+    values.put("read", book.read)
     values.put("wishlist", book.wishlist)
+    values.put("coverUrl", book.coverUrl)
     db.insert("books", null, values)
     db.close()
 }
@@ -97,7 +107,10 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
                     cursor.getString(cursor.getColumnIndexOrThrow("price")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                    cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
+                    cursor.getString(cursor.getColumnIndexOrThrow("coverUrl"))
                 )
                 bookList.add(book)
             } while (cursor.moveToNext())
@@ -123,7 +136,10 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
                     cursor.getString(cursor.getColumnIndexOrThrow("price")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                    cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
+                    cursor.getString(cursor.getColumnIndexOrThrow("coverUrl"))
                 )
                 wishList.add(book)
             } while (cursor.moveToNext())
@@ -147,7 +163,10 @@ class BookDbHelper(context: Context?) :
             cursor.getString(cursor.getColumnIndexOrThrow("genre")),
             cursor.getString(cursor.getColumnIndexOrThrow("year")),
             cursor.getString(cursor.getColumnIndexOrThrow("price")),
-            cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+            cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
+            cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
+            cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
+            cursor.getString(cursor.getColumnIndexOrThrow("coverUrl"))
 
         )
         cursor.close()
@@ -167,7 +186,10 @@ class BookDbHelper(context: Context?) :
         values.put("genre", updatedBook.genre)
         values.put("year", updatedBook.year)
         values.put("price", updatedBook.price)
+        values.put("rating", updatedBook.rating)
+        values.put("read", updatedBook.read)
         values.put("wishlist", updatedBook.wishlist)
+        values.put("coverUrl", updatedBook.coverUrl)
         db.update("books", values, "id = ?", arrayOf(updatedBook.id.toString()))
         db.close()
 
