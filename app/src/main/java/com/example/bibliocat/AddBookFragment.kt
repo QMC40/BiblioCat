@@ -39,6 +39,11 @@ class AddBookFragment : Fragment() {
 
 
         addButton.setOnClickListener {
+            if(titleEditText.text.isEmpty() && authorEditText.text.isEmpty()) {
+                Toast.makeText(context, "Title and Author cannot be empty", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
             val book = Book(
                 title = titleEditText.text.toString(),
                 author = authorEditText.text.toString(),

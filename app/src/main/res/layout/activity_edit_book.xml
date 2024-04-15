@@ -35,6 +35,13 @@
             android:inputType="text"
             tools:ignore="Autofill" />
 
+        <CheckBox
+            android:id="@+id/wishlistCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wishlist"
+            android:textSize="18sp"/>
+
         <!-- Add other EditText fields as needed -->
 
         <Button

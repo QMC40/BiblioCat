@@ -11,5 +11,6 @@ data class Book(
     val genre: String = "",
     val year: String = "",
     val price: String = "",
-    val wishlist: Boolean = false
+//    var read: Boolean = false,
+    var wishlist: Boolean = false
 )

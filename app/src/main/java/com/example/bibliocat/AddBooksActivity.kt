@@ -44,6 +44,8 @@ class AddBooksActivity : AppCompatActivity() {
         print("Entering book manually")
     }
 
+
+
     fun scanCover(view: View) {
         print("Scanning cover")
     }

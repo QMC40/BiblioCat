@@ -15,7 +15,7 @@ class BookshelfActivity : AppCompatActivity() {
         setContentView(R.layout.book_shelf_activity)
 
         dbHelper = BookDbHelper(this)
-        val bookList = dbHelper.getAllBooks()
+        val bookList = dbHelper.getBookshelf()
 
         adapter = BookAdapter(bookList)
         val recyclerView = findViewById<RecyclerView>(R.id.bookRecyclerView)
@@ -25,7 +25,7 @@ class BookshelfActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val bookList = dbHelper.getAllBooks()
+        val bookList = dbHelper.getBookshelf()
         adapter.bookList = bookList
         adapter.notifyDataSetChanged()
     }

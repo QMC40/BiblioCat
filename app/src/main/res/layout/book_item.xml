@@ -31,13 +31,6 @@
             android:layout_height="wrap_content"
             android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/wishlistRadioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wishlist"
-            android:textSize="18sp"/>
-
         <!-- Add more TextViews for other book details as needed -->
 
     <LinearLayout

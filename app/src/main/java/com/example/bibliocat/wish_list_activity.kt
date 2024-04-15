@@ -15,7 +15,7 @@ class WishlistActivity : AppCompatActivity() {
         setContentView(R.layout.activity_wishlist)
 
         dbHelper = BookDbHelper(this)
-        val wishlist = dbHelper.getAllWishlistBooks()
+        val wishlist = dbHelper.getWishlist()
 
         adapter = BookAdapter(wishlist)
         val recyclerView = findViewById<RecyclerView>(R.id.bookRecyclerView)
@@ -25,7 +25,7 @@ class WishlistActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val wishlist = dbHelper.getAllWishlistBooks()
+        val wishlist = dbHelper.getWishlist()
         adapter.bookList = wishlist
         adapter.notifyDataSetChanged()
     }
