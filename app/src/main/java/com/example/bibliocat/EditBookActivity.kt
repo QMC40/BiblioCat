@@ -1,6 +1,7 @@
 package com.example.bibliocat
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ class EditBookActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
     private lateinit var authorEditText: EditText
     private lateinit var isbnEditText: EditText
+    private lateinit var wishListCheckBox: CheckBox
     private lateinit var saveButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +22,7 @@ class EditBookActivity : AppCompatActivity() {
         titleEditText = findViewById(R.id.titleEditText)
         authorEditText = findViewById(R.id.authorEditText)
         isbnEditText = findViewById(R.id.isbnEditText)
+        wishListCheckBox = findViewById(R.id.wishlistCheckBox)
         saveButton = findViewById(R.id.saveButton)
 
         val bookId = intent.getIntExtra("bookId", -1)
@@ -33,6 +36,7 @@ class EditBookActivity : AppCompatActivity() {
         titleEditText.setText(book.title)
         authorEditText.setText(book.author)
         isbnEditText.setText(book.isbn)
+        wishListCheckBox.isChecked = book.wishlist
 
         saveButton.setOnClickListener {
             val updatedBook = Book(
@@ -40,6 +44,7 @@ class EditBookActivity : AppCompatActivity() {
                 title = titleEditText.text.toString(),
                 author = authorEditText.text.toString(),
                 isbn = isbnEditText.text.toString(),
+                wishlist = wishListCheckBox.isChecked
 
                 // Add other fields as needed
             )

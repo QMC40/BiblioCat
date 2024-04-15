@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+
 class AddBooksActivity : AppCompatActivity() {
 
     private val dbHelper = BookDbHelper(this)
@@ -17,6 +18,7 @@ class AddBooksActivity : AppCompatActivity() {
 
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
+
         countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
     }
 
@@ -36,11 +38,13 @@ class AddBooksActivity : AppCompatActivity() {
 
     fun enterBookManually(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, AddBookFragment())
+        transaction.replace(R.id.add_book_fragment_container, AddBookFragment())
         transaction.addToBackStack(null)
         transaction.commit()
         print("Entering book manually")
     }
+
+
 
     fun scanCover(view: View) {
         print("Scanning cover")

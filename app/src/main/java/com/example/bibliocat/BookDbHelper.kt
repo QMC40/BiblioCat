@@ -18,43 +18,61 @@ class BookDbHelper(context: Context?) :
 
     companion object {
         private const val DATABASE_NAME = "bookLibrary.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 6
         private const val CREATE_TABLE = "CREATE TABLE books (" +
                 "id INTEGER PRIMARY KEY," +
                 "title TEXT," +
+//                "title TEXT NOT NULL," +
                 "author TEXT," +
+//                "author TEXT NOT NULL," +
                 "isbn TEXT," +
                 "publisher TEXT," +
                 "edition TEXT," +
                 "pages TEXT," +
                 "genre TEXT," +
                 "year TEXT," +
-                "price TEXT)"
+                "price TEXT," +
+//                "read BOOLEAN DEFAULT 0 CHECK(read IN (0,1)),"
+                "wishlist BOOLEAN DEFAULT 0 CHECK(wishlist IN (0,1)))"
     }
+
 
     fun getBooksCount(): Int {
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM books", null)
+        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 0", null)
         val count = cursor.count
         cursor.close()
         return count
     }
 
-    fun addBook(book: Book) {
-        val db = this.writableDatabase
-        val values = ContentValues()
-        values.put("title", book.title)
-        values.put("author", book.author)
-        values.put("isbn", book.isbn)
-        values.put("publisher", book.publisher)
-        values.put("edition", book.edition)
-        values.put("pages", book.pages)
-        values.put("genre", book.genre)
-        values.put("year", book.year)
-        values.put("price", book.price)
-        db.insert("books", null, values)
-        db.close()
+    fun getWishListCount(): Int {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 1",null)
+        val count = cursor.count
+        cursor.close()
+        return count
     }
+
+   fun addBook(book: Book) {
+    if (book.title.isEmpty() && book.author.isEmpty()) {
+        throw IllegalArgumentException("Title and author cannot be empty")
+    }
+
+    val db = this.writableDatabase
+    val values = ContentValues()
+    values.put("title", book.title)
+    values.put("author", book.author)
+    values.put("isbn", book.isbn)
+    values.put("publisher", book.publisher)
+    values.put("edition", book.edition)
+    values.put("pages", book.pages)
+    values.put("genre", book.genre)
+    values.put("year", book.year)
+    values.put("price", book.price)
+    values.put("wishlist", book.wishlist)
+    db.insert("books", null, values)
+    db.close()
+}
 
     fun deleteBook(id: Int) {
         val db = this.writableDatabase
@@ -62,10 +80,10 @@ class BookDbHelper(context: Context?) :
         db.close()
     }
 
-    fun getAllBooks(): List<Book> {
+    fun getBookshelf(): List<Book> {
         val bookList = ArrayList<Book>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM books", null)
+        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 0", null)
         if (cursor.moveToFirst()) {
             do {
                 val book = Book(
@@ -78,13 +96,40 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("pages")),
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("price"))
+                    cursor.getString(cursor.getColumnIndexOrThrow("price")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
                 )
                 bookList.add(book)
             } while (cursor.moveToNext())
         }
         cursor.close()
         return bookList
+    }
+
+    fun getWishlist(): List<Book> {
+        val wishList = ArrayList<Book>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 1", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val book = Book(
+                    cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("author")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("isbn")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("publisher")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("edition")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("pages")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("genre")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("year")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("price")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                )
+                wishList.add(book)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return wishList
     }
 
     fun getBook(bookId: Int): Book {
@@ -101,7 +146,9 @@ class BookDbHelper(context: Context?) :
             cursor.getString(cursor.getColumnIndexOrThrow("pages")),
             cursor.getString(cursor.getColumnIndexOrThrow("genre")),
             cursor.getString(cursor.getColumnIndexOrThrow("year")),
-            cursor.getString(cursor.getColumnIndexOrThrow("price"))
+            cursor.getString(cursor.getColumnIndexOrThrow("price")),
+            cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+
         )
         cursor.close()
         return book
@@ -120,9 +167,9 @@ class BookDbHelper(context: Context?) :
         values.put("genre", updatedBook.genre)
         values.put("year", updatedBook.year)
         values.put("price", updatedBook.price)
+        values.put("wishlist", updatedBook.wishlist)
         db.update("books", values, "id = ?", arrayOf(updatedBook.id.toString()))
         db.close()
 
     }
-
 }

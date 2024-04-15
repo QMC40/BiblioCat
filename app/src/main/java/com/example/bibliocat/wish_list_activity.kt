@@ -5,28 +5,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class BookshelfActivity : AppCompatActivity() {
+class WishlistActivity : AppCompatActivity() {
 
     private lateinit var adapter: BookAdapter
     private lateinit var dbHelper: BookDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.book_shelf_activity)
+        setContentView(R.layout.activity_wishlist)
 
         dbHelper = BookDbHelper(this)
-        val bookList = dbHelper.getBookshelf()
+        val wishlist = dbHelper.getWishlist()
 
-        adapter = BookAdapter(bookList)
+        adapter = BookAdapter(wishlist)
         val recyclerView = findViewById<RecyclerView>(R.id.bookRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-    }
+        }
 
     override fun onResume() {
         super.onResume()
-        val bookList = dbHelper.getBookshelf()
-        adapter.bookList = bookList
+        val wishlist = dbHelper.getWishlist()
+        adapter.bookList = wishlist
         adapter.notifyDataSetChanged()
     }
 }
