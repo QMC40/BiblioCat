@@ -1,122 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:src="@drawable/madkatcvr"
+        android:contentDescription="@string/book_cover_image" />
 
-            <EditText
-                android:id="@+id/titleEditText"
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
+        tools:ignore="Autofill" />
+
+    <EditText
+        android:id="@+id/authorEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/author"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
+        tools:ignore="Autofill" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/title"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:textColorHint="#546E7A"
-                tools:ignore="Autofill" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/authorEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/author"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:textColorHint="#546E7A"
-                tools:ignore="Autofill" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:layout_gravity="bottom"
+                    android:text="@string/genre"
+                    android:textColor="#546E7A"
+                    android:textSize="18sp" />
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:fillViewport="false"
-                >
 
-                <LinearLayout
+                <Spinner
+                    android:id="@+id/genreSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:dropDownHorizontalOffset="15dp"
+                    android:hint="@string/genre"
+                    android:minHeight="48dp"
+                    android:layout_gravity="bottom"
+                    android:prompt="@string/genre"
+                    android:textColorHint="#546E7A" />
 
-                    <EditText
-                        android:id="@+id/genreEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/genre"
-                        android:inputType="text"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/isbnEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/isbn"
-                        android:inputType="number"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#B0BEC5" />
 
-                    <EditText
-                        android:id="@+id/publisherEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/publisher"
-                        android:inputType="text"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            <EditText
+                android:id="@+id/isbnEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/isbn"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
 
-                    <EditText
-                        android:id="@+id/editionEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/edition"
-                        android:inputType="text"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            <EditText
+                android:id="@+id/publisherEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/publisher"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
 
-                    <EditText
-                        android:id="@+id/pagesEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/pages"
-                        android:inputType="number"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            <EditText
+                android:id="@+id/editionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edition"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
 
-                    <EditText
-                        android:id="@+id/yearEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/year"
-                        android:inputType="number"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            <EditText
+                android:id="@+id/pagesEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/pages"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
 
-                    <EditText
-                        android:id="@+id/priceEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/price"
-                        android:inputType="numberDecimal"
-                        android:minHeight="48dp"
-                        android:textColorHint="#546E7A"
-                        tools:ignore="Autofill" />
+            <EditText
+                android:id="@+id/yearEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/year"
+                android:inputType="number"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
 
-                    <Spinner
-                        android:id="@+id/spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/priceEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/price"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#546E7A"
+                tools:ignore="Autofill" />
 
-                </LinearLayout>
+        </LinearLayout>
 
-            </ScrollView>
-
+    </ScrollView>
 
     <TextView
         android:id="@+id/ratingTextView"
@@ -133,8 +155,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:numStars="5"
-        android:stepSize="0.5"
-        android:rating="3" />
+        android:rating="3"
+        android:stepSize="0.5" />
 
     <LinearLayout
         android:layout_width="match_parent"

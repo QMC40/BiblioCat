@@ -1,5 +1,6 @@
 package com.example.bibliocat
 
+
 data class Book(
     val id: Int = -1,
     val title: String = "",
