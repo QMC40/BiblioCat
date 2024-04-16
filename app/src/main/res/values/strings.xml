@@ -37,9 +37,25 @@
     <string name="rating">Rating</string>
     <string name="book_cover_image" />
     <string name="cover_image">Cover Image</string>
+    <string name="no_books_to_display">No books to display</string>
+    <string name="no_books_read">No books read yet</string>
+    <string name="books_read">Books Read</string>
+    <string name="books_wanted">Books Wanted</string>
+    <string name="books_collected">Books Collected</string>
+    <string name="search_for_a_book">Search for a book</string>
+    <string name="search">Search</string>
+    <string name="update_book">Update Book</string>
     <plurals name="book_count_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>
+    </plurals>
+    <plurals name="wishlist_count_format">
+        <item quantity="one">%1$d book in wishlist</item>
+        <item quantity="other">%1$d books in wishlist</item>
+    </plurals>
+    <plurals name="book_read_count_format">
+        <item quantity="one">%1$d book read</item>
+        <item quantity="other">%1$d books read</item>
     </plurals>
     <string-array name="genre_array">
         <item>Non-Fiction</item>

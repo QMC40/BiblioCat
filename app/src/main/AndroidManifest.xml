@@ -24,10 +24,13 @@
             android:windowSoftInputMode="stateHidden"
             android:exported="false" />
         <activity
-            android:name=".BookshelfActivity"
+            android:name=".BookShelfActivity"
             android:exported="false" />
         <activity
             android:name=".EditBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchResultsActivity"
             android:exported="false" />
         <activity
             android:name=".ShareActivity"
@@ -36,7 +39,7 @@
             android:name=".TestActivity"
             android:exported="false" />
         <activity
-            android:name=".WhatAmIReadingActivity"
+            android:name=".BooksReadActivity"
             android:exported="false" />
         <activity
             android:name=".WishlistActivity"

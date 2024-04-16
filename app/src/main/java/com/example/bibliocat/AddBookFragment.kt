@@ -72,11 +72,11 @@ class AddBookFragment : Fragment() {
             val book = Book(
                 title = titleEditText.text.toString(),
                 author = authorEditText.text.toString(),
+                genre = genreSpinner.selectedItem.toString(),
                 isbn = isbnEditText.text.toString(),
                 publisher = publisherEditText.text.toString(),
                 edition = editionEditText.text.toString(),
                 pages = pagesEditText.text.toString(),
-                genre = genreSpinner.selectedItem.toString(),
                 year = yearEditText.text.toString(),
                 price = priceEditText.text.toString(),
                 rating = ratingBar.rating.toDouble(),

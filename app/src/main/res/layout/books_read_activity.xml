@@ -7,15 +7,28 @@
     android:layout_margin="5dp"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".WishlistActivity">
+    tools:context=".BooksReadActivity">
 
     <TextView
-        android:id="@+id/wishlistBooksCounterTextView"
+        android:id="@+id/booksReadCounterTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/books_wanted"
+        android:text="@string/books_read"
         android:textSize="30sp" />
+
+<!--    <androidx.appcompat.widget.SearchView-->
+<!--        android:id="@+id/searchView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:queryHint="Search books..." />-->
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/emptyView"
@@ -27,6 +40,16 @@
         android:text="@string/no_books_to_display"
         android:visibility="gone" />
 
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/bookRecyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@id/searchView"-->
+<!--        android:padding="16dp"-->
+<!--        android:scrollbars="vertical"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        android:visibility="gone"/>-->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookRecyclerView"
         android:layout_width="match_parent"
@@ -35,6 +58,5 @@
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:visibility="gone"/>
-
 
 </LinearLayout>

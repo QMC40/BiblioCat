@@ -24,4 +24,11 @@
         <item name="android:minHeight">48dp</item>
         <item name="android:textColorHint">#546E7A</item>
     </style>
+
+    <style name="TextStyle2">
+        <item name="android:textColor">#546E7A</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColorHint">#546E7A</item>
+    </style>
 </resources>

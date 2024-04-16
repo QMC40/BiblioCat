@@ -7,11 +7,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var searchField: EditText
+    private lateinit var searchBtn: Button
     private lateinit var addBooksBtn: Button
     private lateinit var bookshelfBtn: Button
     private lateinit var shareBtn: Button
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        searchField = findViewById(R.id.searchField)
+        searchBtn = findViewById(R.id.searchBtn)
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
         countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
@@ -34,12 +39,17 @@ class MainActivity : AppCompatActivity() {
         wishlistBtn = findViewById(R.id.wishlistBtn)
         whatAmIReadingBtn = findViewById(R.id.whatAmIReadingBtn)
 
+        searchBtn.setOnClickListener {
+            val searchQuery = searchField.text.toString()
+            searchForBooks(searchQuery)
+        }
+
         addBooksBtn.setOnClickListener {
             openAddBooksActivity(it)
         }
 
         bookshelfBtn.setOnClickListener {
-            openBookshelfActivity(it)
+            openBookShelfActivity(it)
         }
 
         shareBtn.setOnClickListener {
@@ -51,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         whatAmIReadingBtn.setOnClickListener {
-            openWhatAmIReadingActivity(it)
+            openBooksReadActivity(it)
         }
     }
 
@@ -69,9 +79,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun openBookshelfActivity(view: View) {
+    fun openBookShelfActivity(view: View) {
         // Handle bookshelfBtn click
-        val intent = Intent(this, BookshelfActivity::class.java)
+        val intent = Intent(this, BookShelfActivity::class.java)
         startActivity(intent)
     }
 
@@ -87,9 +97,17 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun openWhatAmIReadingActivity(view: View) {
+    fun openBooksReadActivity(view: View) {
         // Handle whatAmIReadingBtn click
-        val intent = Intent(this, WhatAmIReadingActivity::class.java)
+        val intent = Intent(this, BooksReadActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun searchForBooks(searchQuery: String) {
+        val dbHelper = BookDbHelper(this)
+        val books = dbHelper.searchBooks(searchQuery)
+        val intent = Intent(this, SearchResultsActivity::class.java)
+        intent.putParcelableArrayListExtra("books", ArrayList(books))
         startActivity(intent)
     }
 }
