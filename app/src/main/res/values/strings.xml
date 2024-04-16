@@ -14,11 +14,11 @@
     <string name="what_i_read">what I read</string>
     <string name="cute_kat_sorting_books">cute kat sorting books</string>
     <string name="enter_book_manually">Manual add</string>
-    <string name="scan_cover">Scan Book Cover</string>
+    <string name="add_with_cover">Add with Cover</string>
     <string name="search_online">Search Online</string>
     <string name="scan_barcode">Scan Barcode</string>
-    <string name="title">Book Title</string>
-    <string name="author">Book Author</string>
+    <string name="title">Book Title (Required)</string>
+    <string name="author">Book Author(Required)</string>
     <string name="isbn">Book ISBN</string>
     <string name="publisher">Book Publisher</string>
     <string name="edition">Book Edition</string>
@@ -31,9 +31,29 @@
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="add_a_book_to_wishlist">add a book to the wishlist</string>
-    <string name="wishlist_toggle">Wishlist?</string>
+    <string name="wishlist_toggle">Wishlist</string>
+    <string name="book_cover">Book cover</string>
+    <string name="read">Read</string>
+    <string name="rating">Rating</string>
+    <string name="book_cover_image" />
+    <string name="cover_image">Cover Image</string>
     <plurals name="book_count_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>
     </plurals>
+    <string-array name="genre_array">
+        <item>Non-Fiction</item>
+        <item>Fiction</item>
+        <item>Fantasy</item>
+        <item>Science Fiction</item>
+        <item>Mystery</item>
+        <item>Horror</item>
+        <item>Historical Fiction</item>
+        <item>Biography</item>
+        <item>Autobiography</item>
+        <item>Science</item>
+        <item>Self-Help</item>
+        <item>Travel</item>
+        <!-- Add more genres here -->
+    </string-array>
 </resources>

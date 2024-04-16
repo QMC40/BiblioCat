@@ -11,6 +11,12 @@ data class Book(
     val genre: String = "",
     val year: String = "",
     val price: String = "",
-//    var read: Boolean = false,
-    var wishlist: Boolean = false
-)
+    val rating: Double = 0.0,
+    val read: Boolean = false,
+    val wishlist: Boolean = false,
+//    val coverImage: Blob?
+) {
+//    fun getCoverImage(): Blob? {
+//        return coverImage
+//    }
+}
