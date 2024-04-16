@@ -1,6 +1,5 @@
 package com.example.bibliocat
 
-
 data class Book(
     val id: Int = -1,
     val title: String = "",
@@ -15,5 +14,9 @@ data class Book(
     val rating: Double = 0.0,
     val read: Boolean = false,
     val wishlist: Boolean = false,
-    val coverUrl: String = ""
-)
+//    val coverImage: Blob?
+) {
+//    fun getCoverImage(): Blob? {
+//        return coverImage
+//    }
+}

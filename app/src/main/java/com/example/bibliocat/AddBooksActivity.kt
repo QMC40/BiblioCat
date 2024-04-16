@@ -41,14 +41,14 @@ class AddBooksActivity : AppCompatActivity() {
         transaction.replace(R.id.add_book_fragment_container, AddBookFragment())
         transaction.addToBackStack(null)
         transaction.commit()
-        print("Entering book manually")
     }
 
-
-
-    fun scanCover(view: View) {
-        print("Scanning cover")
-    }
+    fun getCover(view: View) {
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.replace(R.id.add_book_fragment_container, CameraFragment())
+    transaction.addToBackStack(null)
+    transaction.commit()
+}
 
     fun searchOnline(view: View) {
         print("Searching online")

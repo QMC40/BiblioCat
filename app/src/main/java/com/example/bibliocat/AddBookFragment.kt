@@ -10,9 +10,11 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 
 class AddBookFragment : Fragment() {
@@ -20,7 +22,8 @@ class AddBookFragment : Fragment() {
     private lateinit var dbHelper: BookDbHelper
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add_book, container, false)
@@ -39,9 +42,10 @@ class AddBookFragment : Fragment() {
         val wishlistCheckBox = view.findViewById<CheckBox>(R.id.wishlistSwitch)
         val readCheckBox = view.findViewById<CheckBox>(R.id.readSwitch)
         val ratingBar = view.findViewById<RatingBar>(R.id.ratingBar)
+        val coverImageView = view.findViewById<ImageView>(R.id.coverImageView)
         val addButton = view.findViewById<Button>(R.id.addButton)
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and customized spinner layout
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.genre_array,
@@ -59,6 +63,12 @@ class AddBookFragment : Fragment() {
                     .show()
                 return@setOnClickListener
             }
+
+            // Get the cover image as a bitmap
+            val coverImage = coverImageView.drawable.toBitmap()
+            // convert the bitmap to a byte array
+
+            // Create a new book object to hold the data from the form
             val book = Book(
                 title = titleEditText.text.toString(),
                 author = authorEditText.text.toString(),
@@ -71,7 +81,8 @@ class AddBookFragment : Fragment() {
                 price = priceEditText.text.toString(),
                 rating = ratingBar.rating.toDouble(),
                 read = readCheckBox.isChecked,
-                wishlist = wishlistCheckBox.isChecked
+                wishlist = wishlistCheckBox.isChecked,
+//                coverImage = null
             )
             dbHelper.addBook(book)
             Toast.makeText(context, "Book has been added to the collection", Toast.LENGTH_SHORT)

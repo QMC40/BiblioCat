@@ -34,10 +34,10 @@
             app:layout_row="0" />
 
         <Button
-            android:id="@+id/scanCoverBtn"
+            android:id="@+id/coverBtn"
             style="@style/ButtonStyle1"
-            android:onClick="scanCover"
-            android:text="@string/scan_cover"
+            android:onClick="getCover"
+            android:text="@string/add_with_cover"
             app:layout_gravity="center"
             app:layout_column="1"
             app:layout_row="0" />

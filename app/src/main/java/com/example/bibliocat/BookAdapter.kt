@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
 class BookAdapter(var bookList: List<Book>) :
     RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
@@ -37,11 +36,11 @@ class BookAdapter(var bookList: List<Book>) :
         // Add more bindings for other book details as needed
 
         // Add logic to load cover image if available
-         Glide.with(holder.itemView.context)
-            .load(book.coverUrl)
-            .placeholder(R.drawable.ic_book)
-            .error(R.drawable.ic_book)
-            .into(holder.coverImageView)
+//         Glide.with(holder.itemView.context)
+//            .load(book.coverImage)
+//            .placeholder(R.drawable.ic_book)
+//            .error(R.drawable.ic_book)
+//            .into(holder.coverImageView)
 
         holder.deleteButton.setOnClickListener {
             val dbHelper = BookDbHelper(holder.itemView.context)
