@@ -31,33 +31,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/isbnTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp" />
-
-            <!-- Add more TextViews for other book details as needed -->
-
-            <!--TODO: convert buttons to icons instead of text and rearrange them in the layout -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <Button
-                    android:id="@+id/deleteButton"
-                    style="@style/ButtonStyle1"
-                    android:text="@string/delete" />
-
-                <Button
-                    android:id="@+id/editButton"
-                    style="@style/ButtonStyle1"
-                    android:text="@string/edit" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
         <ImageView

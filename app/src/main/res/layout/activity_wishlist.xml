@@ -17,6 +17,12 @@
         android:text="@string/books_wanted"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/backBtn"
+        style="@style/ButtonStyle1"
+        android:text="@string/back"
+        android:layout_gravity="center"/>
+
     <TextView
         android:id="@+id/emptyView"
         android:layout_width="match_parent"

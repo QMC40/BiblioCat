@@ -17,6 +17,12 @@
         android:text="@string/books_read"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/backBtn"
+        style="@style/ButtonStyle1"
+        android:text="@string/back"
+        android:layout_gravity="center"/>
+
 <!--    <androidx.appcompat.widget.SearchView-->
 <!--        android:id="@+id/searchView"-->
 <!--        android:layout_width="match_parent"-->

@@ -103,6 +103,7 @@ class EditBookActivity : AppCompatActivity() {
             Toast.makeText(this, "Book updated", Toast.LENGTH_SHORT).show()
             finish()
         }
+        // TODO: make a confirmation dialog before updating the book showing the user the changes
     }
 }
 

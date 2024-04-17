@@ -57,4 +57,8 @@ class AddBooksActivity : AppCompatActivity() {
     fun scanBarcode(view: View) {
         print("Scanning barcode")
     }
+
+    fun back(view: View) {
+        finish()
+    }
 }

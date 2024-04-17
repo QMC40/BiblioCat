@@ -2,6 +2,7 @@ package com.example.bibliocat
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ class BooksReadActivity : AppCompatActivity() {
 
     private lateinit var adapter: BookAdapter
     private lateinit var dbHelper: BookDbHelper
+    private lateinit var backBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,7 @@ class BooksReadActivity : AppCompatActivity() {
         dbHelper = BookDbHelper(this)
         val bookList = dbHelper.getReadBooks()
         val emptyView = findViewById<TextView>(R.id.emptyView)
+        backBtn = findViewById(R.id.backBtn)
 
         val count = dbHelper.getReadBooksCount()
         val countTextView = findViewById<TextView>(R.id.booksReadCounterTextView)
@@ -36,6 +39,10 @@ class BooksReadActivity : AppCompatActivity() {
             recyclerView.visibility = View.VISIBLE
             emptyView.visibility = View.GONE
         }
+
+        backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {
@@ -43,5 +50,10 @@ class BooksReadActivity : AppCompatActivity() {
         val bookList = dbHelper.getReadBooks()
         adapter.bookList = bookList
         adapter.notifyDataSetChanged()
+
+        // TODO: Add code to update the book count
+        val count = dbHelper.getReadBooksCount()
+        val countTextView = findViewById<TextView>(R.id.booksReadCounterTextView)
+        countTextView.text = resources.getQuantityString(R.plurals.book_read_count_format, count, count)
     }
 }

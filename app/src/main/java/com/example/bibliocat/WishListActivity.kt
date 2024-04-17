@@ -2,6 +2,7 @@ package com.example.bibliocat
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ class WishlistActivity : AppCompatActivity() {
 
     private lateinit var adapter: BookAdapter
     private lateinit var dbHelper: BookDbHelper
+    private lateinit var backBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,11 +20,11 @@ class WishlistActivity : AppCompatActivity() {
 
         dbHelper = BookDbHelper(this)
         val wishlist = dbHelper.getWishlist()
+        backBtn = findViewById(R.id.backBtn)
 
         val count = dbHelper.getWishListCount()
         val countTextView = findViewById<TextView>(R.id.wishlistBooksCounterTextView)
-        countTextView.text =
-            resources.getQuantityString(R.plurals.wishlist_count_format, count, count)
+        countTextView.text = resources.getQuantityString(R.plurals.wishlist_count_format, count, count)
         val emptyView = findViewById<TextView>(R.id.emptyView)
 
         adapter = BookAdapter(wishlist)
@@ -37,6 +39,11 @@ class WishlistActivity : AppCompatActivity() {
             recyclerView.visibility = View.VISIBLE
             emptyView.visibility = View.GONE
         }
+
+        backBtn.setOnClickListener {
+            finish()
+        }
+
     }
 
     override fun onResume() {

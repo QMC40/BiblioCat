@@ -67,10 +67,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
+        // Refresh the book count
         countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
+        // Clear the search field
+        searchField.text.clear()
     }
 
     fun openAddBooksActivity(view: View) {

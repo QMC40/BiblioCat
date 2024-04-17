@@ -42,9 +42,11 @@
     <string name="books_read">Books Read</string>
     <string name="books_wanted">Books Wanted</string>
     <string name="books_collected">Books Collected</string>
+    <string name="search_results">Search Results</string>
     <string name="search_for_a_book">Search for a book</string>
     <string name="search">Search</string>
     <string name="update_book">Update Book</string>
+    <string name="back">Back</string>
     <plurals name="book_count_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>

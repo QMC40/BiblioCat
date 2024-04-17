@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".SearchResultsActivity">
 
+    <Button
+        android:id="@+id/backBtn"
+        style="@style/ButtonStyle1"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
