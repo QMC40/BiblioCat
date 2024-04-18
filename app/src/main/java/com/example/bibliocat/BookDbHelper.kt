@@ -51,6 +51,14 @@ class BookDbHelper(context: Context?) :
         return count
     }
 
+    fun getTotalCount(): Int {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM books", null)
+        val count = cursor.count
+        cursor.close()
+        return count
+    }
+
     fun getWishListCount(): Int {
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 1", null)
@@ -101,7 +109,7 @@ class BookDbHelper(context: Context?) :
     fun getBookshelf(): List<Book> {
         val bookList = ArrayList<Book>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 0", null)
+        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 0 ORDER BY title ASC", null)
         if (cursor.moveToFirst()) {
             do {
 
@@ -124,9 +132,9 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
                     cursor.getString(cursor.getColumnIndexOrThrow("price")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
                     cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
-                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1
                 )
                 bookList.add(book)
             } while (cursor.moveToNext())
@@ -138,7 +146,7 @@ class BookDbHelper(context: Context?) :
     fun getWishlist(): List<Book> {
         val wishList = ArrayList<Book>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 1", null)
+        val cursor = db.rawQuery("SELECT * FROM books WHERE wishlist = 1 ORDER BY title ASC", null)
         if (cursor.moveToFirst()) {
             do {
                 val book = Book(
@@ -152,9 +160,9 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
                     cursor.getString(cursor.getColumnIndexOrThrow("price")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
                     cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
-                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1
 //                    cursor.getInt(cursor.getColumnIndexOrThrow("coverResourceId"))
                 )
                 wishList.add(book)
@@ -167,7 +175,7 @@ class BookDbHelper(context: Context?) :
     fun getReadBooks(): List<Book> {
         val readBooks = ArrayList<Book>()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM books WHERE read = 1", null)
+        val cursor = db.rawQuery("SELECT * FROM books WHERE read = 1 ORDER BY title ASC", null)
         if (cursor.moveToFirst()) {
             do {
                 val book = Book(
@@ -181,9 +189,9 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
                     cursor.getString(cursor.getColumnIndexOrThrow("price")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
                     cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
-                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1
                 )
                 readBooks.add(book)
             } while (cursor.moveToNext())
@@ -216,9 +224,9 @@ class BookDbHelper(context: Context?) :
             cursor.getString(cursor.getColumnIndexOrThrow("genre")),
             cursor.getString(cursor.getColumnIndexOrThrow("year")),
             cursor.getString(cursor.getColumnIndexOrThrow("price")),
+            cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
             cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
             cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
-            cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
 //            coverImage = coverImage
 
         )
@@ -254,7 +262,8 @@ class BookDbHelper(context: Context?) :
         val foundBooks = ArrayList<Book>()
         val db = this.readableDatabase
         val cursor = db.rawQuery(
-            "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR isbn LIKE ? OR publisher LIKE ? OR edition LIKE ? OR pages LIKE ? OR genre LIKE ? OR year LIKE ? OR price LIKE ?",
+            "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR isbn LIKE ? OR publisher " +
+                    "LIKE ? OR edition LIKE ? OR pages LIKE ? OR genre LIKE ? OR year LIKE ? OR price LIKE ? ORDER BY title ASC",
             arrayOf(
                 "%$query%",
                 "%$query%",
@@ -280,18 +289,23 @@ class BookDbHelper(context: Context?) :
                     cursor.getString(cursor.getColumnIndexOrThrow("genre")),
                     cursor.getString(cursor.getColumnIndexOrThrow("year")),
                     cursor.getString(cursor.getColumnIndexOrThrow("price")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1,
                     cursor.getDouble(cursor.getColumnIndexOrThrow("rating")),
-                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1,
-                    cursor.getInt(cursor.getColumnIndexOrThrow("wishlist")) == 1
+                    cursor.getInt(cursor.getColumnIndexOrThrow("read")) == 1
                 )
                 foundBooks.add(book)
             } while (cursor.moveToNext())
             cursor.close()
             return foundBooks
-        }
-        else {
+        } else {
             // If no match is found, return null
             return null
         }
+    }
+
+    fun getSearchResults(searchQuery: String): List<Book> {
+        // Search for books in the database that match the search query
+        val books = searchBooks(searchQuery)
+        return books ?: emptyList()
     }
 }

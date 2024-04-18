@@ -85,18 +85,18 @@ class CameraFragment : Fragment() {
             val byteArray = byteArrayOutputStream.toByteArray()
 
             // Create a new instance of the AddBookFragment and pass the byte array as an argument
-            val addBookFragment = AddBookFragment()
+//            val addBookFragment = AddBookFragment()
             // Create a bundle to pass the byte array to the fragment
             val bundle = Bundle()
             // Add the byte array to the bundle
             bundle.putByteArray("coverImage", byteArray)
             // Set the arguments of the fragment to the bundle
-            addBookFragment.arguments = bundle
+//            addBookFragment.arguments = bundle
 
             // Replace the current fragment with the AddBookFragment
             val transaction = parentFragmentManager.beginTransaction()
             // Replace the current fragment with the AddBookFragment
-            transaction.replace(R.id.add_book_fragment_container, addBookFragment)
+//            transaction.replace(R.id.add_book_fragment_container, addBookFragment)
             // Add the transaction to the back stack
             transaction.addToBackStack(null)
             // Commit the transaction

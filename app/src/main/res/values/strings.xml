@@ -28,8 +28,8 @@
     <string name="price">Price Paid</string>
     <string name="add_book">Add Book</string>
     <string name="delete">Delete book</string>
-    <string name="edit">Edit</string>
-    <string name="save">Save</string>
+    <string name="edit">Edit book</string>
+    <string name="save">Save changes</string>
     <string name="add_a_book_to_wishlist">add a book to the wishlist</string>
     <string name="wishlist_toggle">Wishlist</string>
     <string name="book_cover">Book cover</string>
@@ -47,19 +47,34 @@
     <string name="search">Search</string>
     <string name="update_book">Update Book</string>
     <string name="back">Back</string>
-    <plurals name="book_count_format">
+    <string name="titleLabel">Title:</string>
+    <string name="authorLabel">Author:</string>
+    <string name="genreLabel">Genre:</string>
+    <string name="isbnLabel">ISBN:</string>
+    <string name="editionLabel">Edition:</string>
+    <string name="pageLabel">Pages:</string>
+    <string name="yearLabel">Year:</string>
+    <string name="priceLabel">Price:</string>
+    <string name="pubLabel">Publisher:</string>
+    <string name="ratingLabel">Rating:</string>
+    <plurals name="shelf_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>
     </plurals>
-    <plurals name="wishlist_count_format">
+    <plurals name="wishlist_format">
         <item quantity="one">%1$d book in wishlist</item>
         <item quantity="other">%1$d books in wishlist</item>
     </plurals>
-    <plurals name="book_read_count_format">
+    <plurals name="book_read_format">
+        <item quantity="one">%1$d book read</item>
+        <item quantity="other">%1$d books read</item>
+    </plurals>
+    <plurals name="book_found_format">
         <item quantity="one">%1$d book read</item>
         <item quantity="other">%1$d books read</item>
     </plurals>
     <string-array name="genre_array">
+        <item>"nothing selected"</item>
         <item>Non-Fiction</item>
         <item>Fiction</item>
         <item>Fantasy</item>

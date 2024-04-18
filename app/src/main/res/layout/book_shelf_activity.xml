@@ -1,16 +1,30 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookShelfActivity">
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:padding="5dp">
 
-<!--    <androidx.appcompat.widget.SearchView-->
-<!--        android:id="@+id/searchView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:queryHint="Search books..." />-->
+    <TextView
+        android:id="@+id/counterTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/books_read"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/backBtn"
+        style="@style/ButtonStyle1"
+        android:text="@string/back"
+        android:layout_gravity="center"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/emptyView"
@@ -22,16 +36,6 @@
         android:text="@string/no_books_to_display"
         android:visibility="gone" />
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/bookRecyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@id/searchView"-->
-<!--        android:padding="16dp"-->
-<!--        android:scrollbars="vertical"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        android:visibility="gone"/>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookRecyclerView"
         android:layout_width="match_parent"
@@ -41,4 +45,4 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:visibility="gone"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:orientation="vertical"
-    android:padding="5dp"
-    tools:context=".BooksReadActivity">
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/booksReadCounterTextView"
@@ -22,13 +21,6 @@
         style="@style/ButtonStyle1"
         android:text="@string/back"
         android:layout_gravity="center"/>
-
-<!--    <androidx.appcompat.widget.SearchView-->
-<!--        android:id="@+id/searchView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:queryHint="Search books..." />-->
 
     <Space
         android:layout_width="match_parent"
@@ -45,16 +37,6 @@
         style="@style/TextStyle2"
         android:text="@string/no_books_to_display"
         android:visibility="gone" />
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/bookRecyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@id/searchView"-->
-<!--        android:padding="16dp"-->
-<!--        android:scrollbars="vertical"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--        android:visibility="gone"/>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookRecyclerView"

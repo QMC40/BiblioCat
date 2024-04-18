@@ -2,6 +2,7 @@
 
 package com.example.bibliocat
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -19,7 +20,7 @@ class AddBooksActivity : AppCompatActivity() {
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
 
-        countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
+        countTextView.text = resources.getQuantityString(R.plurals.shelf_format, count, count)
     }
 
     override fun onResume() {
@@ -27,28 +28,28 @@ class AddBooksActivity : AppCompatActivity() {
 
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
-        countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
+        countTextView.text = resources.getQuantityString(R.plurals.shelf_format, count, count)
     }
 
     fun updateCounter() {
         val bookCounterTextView = findViewById<TextView>(R.id.bookCounterTextView)
         val count = dbHelper.getBooksCount()
-        bookCounterTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
+        bookCounterTextView.text = resources.getQuantityString(R.plurals.shelf_format, count, count)
     }
 
     fun enterBookManually(view: View) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.add_book_fragment_container, AddBookFragment())
-        transaction.addToBackStack(null)
-        transaction.commit()
+        // Start the EditBookActivity in add mode
+        val intent = Intent(this, EditBookActivity::class.java)
+        intent.putExtra("isEditing", false)
+        startActivity(intent)
     }
 
     fun getCover(view: View) {
-    val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.add_book_fragment_container, CameraFragment())
-    transaction.addToBackStack(null)
-    transaction.commit()
-}
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.add_book_fragment_container, CameraFragment())
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 
     fun searchOnline(view: View) {
         print("Searching online")

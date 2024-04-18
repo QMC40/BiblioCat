@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -11,81 +12,139 @@
 
         <ImageView
             android:id="@+id/coverImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
-            android:src="@drawable/madkatcvr"
-            android:contentDescription="@string/book_cover_image" />
+            android:contentDescription="@string/book_cover_image"
+            android:src="@drawable/madkatcvr" />
 
-        <TextView
-            android:id="@+id/titleTextView"
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:columnCount="3"
+            android:rowCount="9">
 
-        <TextView
-            android:id="@+id/authorTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/titleLabel"
+                android:textStyle="bold"
+                android:clickable="false"/>
 
-        <TextView
-            android:id="@+id/genreTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/titleTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/title"
+                tools:ignore="Autofill"/>
 
-        <TextView
-            android:id="@+id/isbnTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/authorLabel"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/publisherTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/authorTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/author"
+                tools:ignore="Autofill" />
 
-        <TextView
-            android:id="@+id/editionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/genreLabel" />
 
-        <TextView
-            android:id="@+id/pagesTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/genreTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/genre"
+                tools:ignore="Autofill" />
 
-        <TextView
-            android:id="@+id/yearTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/isbnLabel" />
 
-        <TextView
-            android:id="@+id/priceTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/isbnTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/isbn"
+                tools:ignore="Autofill" />
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:rating="3.0"
-            android:stepSize="0.5" />
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/pubLabel" />
+
+            <TextView
+                android:id="@+id/publisherTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/publisher"
+                tools:ignore="Autofill" />
+
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/genreLabel" />
+
+            <TextView
+                android:id="@+id/editionTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/editionLabel"
+                tools:ignore="Autofill" />
+
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/pageLabel" />
+
+            <TextView
+                android:id="@+id/pagesTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/pages"
+                tools:ignore="Autofill" />
+
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/yearLabel" />
+
+            <TextView
+                android:id="@+id/yearTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/year"
+                tools:ignore="Autofill" />
+
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/priceLabel" />
+
+            <TextView
+                android:id="@+id/priceTextView"
+                style="@style/ColumnDisplayStyle2"
+                android:hint="@string/price"
+                tools:ignore="Autofill" />
+
+        </GridLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="false">
+
+            <TextView
+                style="@style/ColumnDisplayStyle1"
+                android:text="@string/ratingLabel"
+                android:paddingRight="15dp"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="3.0"
+                android:stepSize="0.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="false">
 
             <Space
                 android:layout_width="wrap_content"
@@ -97,10 +156,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="false"
                 android:minHeight="48dp"
+                android:paddingRight="15dp"
                 android:text="@string/read"
                 android:textColor="#546E7A"
-                android:clickable="false"
                 android:textSize="18sp" />
 
             <CheckBox
@@ -108,48 +168,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="false"
                 android:minHeight="48dp"
                 android:text="@string/wishlist"
                 android:textColor="#546E7A"
-                android:clickable="false"
                 android:textSize="18sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/editButton"
+                style="@style/ButtonStyle1"
+                android:text="@string/edit" />
 
-        <Button
-            android:id="@+id/editButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/edit" />
+            <Button
+                android:id="@+id/deleteButton"
+                style="@style/ButtonStyle1"
+                android:text="@string/delete" />
 
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/delete" />
+            <Button
+                android:id="@+id/backButton"
+                style="@style/ButtonStyle1"
+                android:text="@string/back" />
 
         </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            />
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Back" />
 
     </LinearLayout>
 

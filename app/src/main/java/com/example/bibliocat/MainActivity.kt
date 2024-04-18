@@ -1,7 +1,6 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "never used")
 
 package com.example.bibliocat
-
 
 import android.content.Intent
 import android.os.Bundle
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         searchBtn = findViewById(R.id.searchBtn)
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
-        countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
+        countTextView.text = resources.getQuantityString(R.plurals.shelf_format, count, count)
 
         addBooksBtn = findViewById(R.id.addBooksBtn)
         bookshelfBtn = findViewById(R.id.bookshelf)
@@ -39,9 +38,20 @@ class MainActivity : AppCompatActivity() {
         wishlistBtn = findViewById(R.id.wishlistBtn)
         whatAmIReadingBtn = findViewById(R.id.whatAmIReadingBtn)
 
+        // Set up the click listeners
         searchBtn.setOnClickListener {
+            // collect the search query
             val searchQuery = searchField.text.toString()
-            searchForBooks(searchQuery)
+            // check if the search field is empty
+            if (searchQuery.isEmpty()) {
+                // prompt the user to enter a search query
+                searchField.error = "Please enter a search query"
+                // return early
+                return@setOnClickListener
+            } else {
+                // search for books
+                searchForBooks(searchQuery)
+            }
         }
 
         addBooksBtn.setOnClickListener {
@@ -67,10 +77,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val count = dbHelper.getBooksCount()
+        val count = dbHelper.getTotalCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
         // Refresh the book count
-        countTextView.text = resources.getQuantityString(R.plurals.book_count_format, count, count)
+        countTextView.text = resources.getQuantityString(R.plurals.shelf_format, count, count)
         // Clear the search field
         searchField.text.clear()
     }
@@ -81,9 +91,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun openBookShelfActivity(view: View) {
+    private fun openBookShelfActivity(view: View) {
         // Handle bookshelfBtn click
         val intent = Intent(this, BookShelfActivity::class.java)
+        intent.putExtra("button", "bookshelf")
         startActivity(intent)
     }
 
@@ -95,21 +106,22 @@ class MainActivity : AppCompatActivity() {
 
     fun openWishlistActivity(view: View) {
         // Handle wishlistBtn click
-        val intent = Intent(this, WishlistActivity::class.java)
+        val intent = Intent(this, BookShelfActivity::class.java)
+        intent.putExtra("button", "wishlist")
         startActivity(intent)
     }
 
-    fun openBooksReadActivity(view: View) {
+    private fun openBooksReadActivity(view: View) {
         // Handle whatAmIReadingBtn click
-        val intent = Intent(this, BooksReadActivity::class.java)
+        val intent = Intent(this, BookShelfActivity::class.java)
+        intent.putExtra("button", "booksread")
         startActivity(intent)
     }
 
     private fun searchForBooks(searchQuery: String) {
-        val dbHelper = BookDbHelper(this)
-        val books = dbHelper.searchBooks(searchQuery)
-        val intent = Intent(this, SearchResultsActivity::class.java)
-        intent.putParcelableArrayListExtra("books", ArrayList(books))
+        val intent = Intent(this, BookShelfActivity::class.java)
+        intent.putExtra("button", "search")
+        intent.putExtra("searchQuery", searchQuery)
         startActivity(intent)
     }
 }
