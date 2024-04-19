@@ -70,8 +70,8 @@
         <item quantity="other">%1$d books read</item>
     </plurals>
     <plurals name="book_found_format">
-        <item quantity="one">%1$d book read</item>
-        <item quantity="other">%1$d books read</item>
+        <item quantity="one">%1$d book found</item>
+        <item quantity="other">%1$d books found</item>
     </plurals>
     <string-array name="genre_array">
         <item>"nothing selected"</item>

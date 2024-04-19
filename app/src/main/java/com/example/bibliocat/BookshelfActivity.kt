@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class BookShelfActivity : AppCompatActivity() {
 
     private lateinit var adapter: BookAdapter
-    private lateinit var dbHelper: BookDbHelper
+    private lateinit var dbHelper: BookDb
     private lateinit var backBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class BookShelfActivity : AppCompatActivity() {
         setContentView(R.layout.book_shelf_activity)
 
         backBtn = findViewById(R.id.backBtn)
-        dbHelper = BookDbHelper(this)
+        dbHelper = BookDb(this)
 
         val button = intent.getStringExtra("button")
         val searchQuery = intent.getStringExtra("searchQuery").toString()

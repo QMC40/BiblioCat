@@ -44,6 +44,7 @@ class BookAdapter(var bookList: List<Book>) :
         }
     }
 
+    // Return the size of your dataset (invoked by the layout manager), required by RecyclerView.Adapter
     override fun getItemCount() = bookList.size
 }
 

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class AddBooksActivity : AppCompatActivity() {
 
-    private val dbHelper = BookDbHelper(this)
+    private val dbHelper = BookDb(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.BitmapFactory
 
-class BookDbHelper(context: Context?) :
+class BookDb(context: Context?) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(CREATE_TABLE)
@@ -258,7 +258,7 @@ class BookDbHelper(context: Context?) :
 
     }
 
-    fun searchBooks(query: String): List<Book>? {
+    private fun searchBooks(query: String): List<Book>? {
         val foundBooks = ArrayList<Book>()
         val db = this.readableDatabase
         val cursor = db.rawQuery(
