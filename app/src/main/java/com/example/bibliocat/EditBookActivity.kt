@@ -35,10 +35,10 @@ class EditBookActivity : AppCompatActivity() {
     private lateinit var backButton: Button
 
     // Initialize the bookId to -1, which is an invalid id, isEditing to false and the dbHelper
-    // to the BookDbHelper object
+    // to the BookDb object
     private var bookId: Int = -1
     private var isEditing: Boolean = false
-    private var dbHelper = BookDbHelper(this)
+    private var dbHelper = BookDb(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

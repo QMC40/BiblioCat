@@ -54,7 +54,7 @@ class BookDetailsActivity : AppCompatActivity() {
 
         bookId = intent.getIntExtra("bookId", -1)
         if (bookId != -1) {
-            val dbHelper = BookDbHelper(this)
+            val dbHelper = BookDb(this)
             val book = dbHelper.getBook(bookId)
 
             titleTextView.text = book.title
@@ -86,7 +86,7 @@ class BookDetailsActivity : AppCompatActivity() {
                 .setTitle("Delete Book")
                 .setMessage("Are you sure you want to delete this book?")
                 .setPositiveButton("Yes") { _, _ ->
-                    val dbHelper = BookDbHelper(this)
+                    val dbHelper = BookDb(this)
                     dbHelper.deleteBook(bookId)
                     finish()
                 }
@@ -101,7 +101,7 @@ class BookDetailsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val dbHelper = BookDbHelper(this)
+        val dbHelper = BookDb(this)
         val book = dbHelper.getBook(bookId)
         titleTextView.text = book.title
         authorTextView.text = book.author

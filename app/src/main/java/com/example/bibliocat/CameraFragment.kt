@@ -67,6 +67,7 @@ class CameraFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // Check if the request to open the camera was successful and the image was captured and returned
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {

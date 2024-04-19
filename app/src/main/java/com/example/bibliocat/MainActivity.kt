@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var shareBtn: Button
     private lateinit var wishlistBtn: Button
     private lateinit var whatAmIReadingBtn: Button
-    private val dbHelper = BookDbHelper(this)
+    private val dbHelper = BookDb(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
