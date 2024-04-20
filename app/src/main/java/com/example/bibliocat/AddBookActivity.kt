@@ -15,7 +15,7 @@ class AddBooksActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_books_activity)
+        setContentView(R.layout.activity_add_book)
 
         val count = dbHelper.getBooksCount()
         val countTextView = findViewById<TextView>(R.id.bookCounterTextView)
@@ -44,6 +44,7 @@ class AddBooksActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // TODO: remove and refactor to click on the image in the edit activity to change the cover
     fun getCover(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.add_book_fragment_container, CameraFragment())

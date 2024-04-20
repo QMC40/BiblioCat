@@ -15,5 +15,5 @@ data class Book(
     val wishlist: Boolean = false,
     val rating: Double = 0.0,
     val read: Boolean = false,
-//    val coverImage: Blob?
+    val coverImage: String? = ""
 )

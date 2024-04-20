@@ -1,6 +1,7 @@
 package com.example.bibliocat
 
 import android.app.AlertDialog
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,11 +60,14 @@ class EditBookActivity : AppCompatActivity() {
         readCheckBox = findViewById(R.id.readSwitch)
         saveButton = findViewById(R.id.saveButton)
         backButton = findViewById(R.id.backButton)
+        coverImageView = findViewById(R.id.coverImageView)
 
         // Get the intent that started this activity and check if the user is editing a book or
         // adding a new one
         isEditing = intent.getBooleanExtra("isEditing", false)
         bookId = intent.getIntExtra("bookId", -1)
+        val byteArray = intent.getByteArrayExtra("coverImage")
+        val bitmap = byteArray?.let { BitmapFactory.decodeByteArray(byteArray, 0, it.size) }
 
         // If the user is editing a book, load the book's details into the form
         if (isEditing) {
@@ -88,7 +92,23 @@ class EditBookActivity : AppCompatActivity() {
             ratingBar.rating = book.rating.toFloat()
             wishListCheckBox.isChecked = book.wishlist
             readCheckBox.isChecked = book.read
+            coverImageView.setImageBitmap(bitmap)
 
+        } else {
+            // If the user is adding a new book, set the default values for the form
+            titleEditText.setText("")
+            authorEditText.setText("")
+            "Select Genre".also { genreTextView.text = it }
+            isbnEditText.setText("")
+            publisherEditText.setText("")
+            editionEditText.setText("")
+            pagesEditText.setText("")
+            yearEditText.setText("")
+            priceEditText.setText("")
+            ratingBar.rating = 0.0f
+            wishListCheckBox.isChecked = false
+            readCheckBox.isChecked = false
+            coverImageView.setImageBitmap(bitmap)
         }
 
         saveButton.setOnClickListener {
@@ -106,6 +126,7 @@ class EditBookActivity : AppCompatActivity() {
                 rating = ratingBar.rating.toDouble(),
                 read = readCheckBox.isChecked,
                 wishlist = wishListCheckBox.isChecked
+//                coverImage = bitmap
 
             )
 

@@ -85,23 +85,10 @@ class CameraFragment : Fragment() {
             // Convert the compressed image to a byte array
             val byteArray = byteArrayOutputStream.toByteArray()
 
-            // Create a new instance of the AddBookFragment and pass the byte array as an argument
-//            val addBookFragment = AddBookFragment()
-            // Create a bundle to pass the byte array to the fragment
-            val bundle = Bundle()
-            // Add the byte array to the bundle
-            bundle.putByteArray("coverImage", byteArray)
-            // Set the arguments of the fragment to the bundle
-//            addBookFragment.arguments = bundle
-
-            // Replace the current fragment with the AddBookFragment
-            val transaction = parentFragmentManager.beginTransaction()
-            // Replace the current fragment with the AddBookFragment
-//            transaction.replace(R.id.add_book_fragment_container, addBookFragment)
-            // Add the transaction to the back stack
-            transaction.addToBackStack(null)
-            // Commit the transaction
-            transaction.commit()
+            // open a new book edit activity with the image data
+            val intent = Intent(context, EditBookActivity::class.java)
+            intent.putExtra("image", byteArray)
+            startActivity(intent)
         }
     }
 
@@ -115,17 +102,17 @@ class CameraFragment : Fragment() {
         return Bitmap.createScaledBitmap(bitmap, imageSize, imageSize, true)
     }
 
-//    @Deprecated("Deprecated in Java")
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        // Check if the camera permission was granted and open the camera if it was
-//        if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            openCamera()
-//        } else {
-//            Log.d("com.example.bibliocat.CameraFragment", "Permission denied")
-//        }
-//    }
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        // Check if the camera permission was granted and open the camera if it was
+        if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            openCamera()
+        } else {
+            Log.d("com.example.bibliocat.CameraFragment", "Permission denied")
+        }
+    }
 }
