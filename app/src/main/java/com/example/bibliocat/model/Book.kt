@@ -1,8 +1,12 @@
-package com.example.bibliocat
+package com.example.bibliocat.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
+@Entity(tableName = "my_collection")
 data class Book(
-    val id: Int = -1,
+
     val title: String? = "",
     val author: String? = "",
     val isbn: String? = "",
@@ -15,5 +19,8 @@ data class Book(
     val wishlist: Boolean = false,
     val rating: Double = 0.0,
     val read: Boolean = false,
-    val coverImage: String? = ""
-)
+    val coverImageAsString: String
+){
+    @PrimaryKey(autoGenerate = true)
+    var bookId = 0
+}

@@ -16,7 +16,7 @@
             android:layout_height="180dp"
             android:layout_gravity="center"
             android:contentDescription="@string/book_cover_image"
-            android:src="@drawable/madkatcvr" />
+            android:src="@drawable/madkat" />
 
         <GridLayout
             android:layout_width="match_parent"
@@ -182,17 +182,17 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/editButton"
+                android:id="@+id/editBtn"
                 style="@style/ButtonStyle1"
                 android:text="@string/edit" />
 
             <Button
-                android:id="@+id/deleteButton"
+                android:id="@+id/deleteBtn"
                 style="@style/ButtonStyle1"
                 android:text="@string/delete" />
 
             <Button
-                android:id="@+id/backButton"
+                android:id="@+id/backBtn"
                 style="@style/ButtonStyle1"
                 android:text="@string/back" />
 

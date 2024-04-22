@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <TextView
         android:id="@+id/bookCounterTextView"
@@ -39,61 +39,68 @@
 
     </LinearLayout>
 
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/buttonField"
+    <LinearLayout
         style="@style/ButtonFieldStyle"
-        android:layout_gravity="center"
-        app:columnOrderPreserved="true"
-        app:columnCount="2"
-        app:rowCount="3">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
         <Button
             android:id="@+id/addBooksBtn"
-            style="@style/ButtonStyle1"
+            style="@style/ButtonStyle2"
             android:onClick="openAddBooksActivity"
             android:text="@string/add_books"
-            app:layout_column="0"
-            app:layout_row="0"
-            app:layout_gravity="center" />
+            app:layout_gravity="center"
+            android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/bookshelf"
-            style="@style/ButtonStyle1"
-            android:onClick="openBookshelfActivity"
+            android:id="@+id/bookshelfBtn"
+            style="@style/ButtonStyle2"
             android:text="@string/bookshelf"
-            app:layout_column="1"
-            app:layout_row="0"
-            app:layout_gravity="center" />
+            app:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/whatAmIReadingBtn"
+                style="@style/ButtonStyle2"
+                android:text="@string/read"
+                app:layout_gravity="center"
+                android:layout_weight="1"/>
+
+
+        <Button
+            android:id="@+id/wishlistBtn"
+            style="@style/ButtonStyle2"
+            android:text="@string/wishlist"
+            app:layout_column="0"
+            app:layout_row="1"
+            app:layout_gravity="center"
+            android:layout_weight="1"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/shareBtn"
             style="@style/ButtonStyle1"
-            android:onClick="openShareActivity"
             android:text="@string/share"
-            app:layout_column="1"
-            app:layout_row="1"
-            app:layout_gravity="center" />
+            app:layout_gravity="center"/>
 
-        <Button
-            android:id="@+id/wishlistBtn"
-            style="@style/ButtonStyle1"
-            android:onClick="openWishlistActivity"
-            android:text="@string/wishlist"
-            app:layout_column="0"
-            app:layout_row="1"
-            app:layout_gravity="center" />
-
-        <Button
-            android:id="@+id/whatAmIReadingBtn"
-            style="@style/ButtonStyle1"
-            android:onClick="openWhatAmIReadingActivity"
-            android:text="@string/whatAmIReading"
-            app:layout_column="0"
-            app:layout_columnSpan="2"
-            app:layout_row="2"
-            app:layout_gravity="center" />
-
-    </androidx.gridlayout.widget.GridLayout>
+    </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.bibliocat
+package com.example.bibliocat.util
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
@@ -18,6 +18,8 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.bibliocat.R
+import com.example.bibliocat.view.EditBookActivity
 import java.io.ByteArrayOutputStream
 
 class CameraFragment : Fragment() {
@@ -62,7 +64,7 @@ class CameraFragment : Fragment() {
         // If there is no camera app, catch the exception and display an error message to the user
         } catch (e: ActivityNotFoundException) {
             // Display error state to the user
-            Log.d("com.example.bibliocat.CameraFragment", "No camera app found")
+            Log.d("com.example.bibliocat.util.CameraFragment", "No camera app found")
             Toast.makeText(context, "No camera app found", Toast.LENGTH_SHORT).show()
         }
     }
@@ -112,7 +114,7 @@ class CameraFragment : Fragment() {
         if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             openCamera()
         } else {
-            Log.d("com.example.bibliocat.CameraFragment", "Permission denied")
+            Log.d("com.example.bibliocat.util.CameraFragment", "Permission denied")
         }
     }
 }

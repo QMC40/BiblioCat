@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     android:orientation="vertical"
     android:padding="5dp"
-    tools:context=".AddBooksActivity">
+    tools:context=".view.AddBooksActivity">
 
     <TextView
         android:id="@+id/bookCounterTextView"
