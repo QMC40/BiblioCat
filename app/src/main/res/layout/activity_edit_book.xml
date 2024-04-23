@@ -16,6 +16,8 @@
             android:layout_height="180dp"
             android:layout_gravity="center"
             android:contentDescription="@string/book_cover_image"
+            android:visibility="visible"
+            android:scaleType="fitXY"
             android:src="@drawable/madkatcvr" />
 
         <GridLayout
@@ -195,5 +197,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </ScrollView>

@@ -2,12 +2,14 @@ package com.example.bibliocat.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.bibliocat.databinding.ActivityBookDetailsBinding
 import com.example.bibliocat.model.Book
+import com.example.bibliocat.util.ConvertImage
 import com.example.bibliocat.viewmodel.BookViewModel
 import kotlinx.coroutines.launch
 
@@ -15,6 +17,8 @@ class BookDetailsActivity : AppCompatActivity() {
 
     private lateinit var bookViewModel: BookViewModel
     private lateinit var bookDetailsBinding: ActivityBookDetailsBinding
+    private lateinit var coverImage: Bitmap
+    private var coverImageAsString: String = ""
     private var book: Book? = null
     private var bookId: Int = -1
 
@@ -25,8 +29,9 @@ class BookDetailsActivity : AppCompatActivity() {
 
         bookId = intent.getIntExtra("bookId", -1)
 
+        bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
+
         if (bookId != -1) {
-            bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
             lifecycleScope.launch {
                 book = bookViewModel.getBookById(bookId)
                 bookDetailsBinding.titleTextView.text = book!!.title
@@ -41,6 +46,13 @@ class BookDetailsActivity : AppCompatActivity() {
                 bookDetailsBinding.ratingBar.rating = book!!.rating.toFloat()
                 bookDetailsBinding.readSwitch.isChecked = book!!.read
                 bookDetailsBinding.wishlistSwitch.isChecked = book!!.wishlist
+
+                // pull the cover image from the database as a string and convert it to a bitmap
+                // then set the bitmap as the cover image
+                coverImageAsString = book!!.coverImageAsString
+                val coverAsBitmap = ConvertImage.convertToBitmap(coverImageAsString)
+
+                bookDetailsBinding.coverImageView.setImageBitmap(coverAsBitmap)
             }
 
             bookDetailsBinding.editBtn.setOnClickListener {
@@ -71,6 +83,7 @@ class BookDetailsActivity : AppCompatActivity() {
             finish()
         }
     }
+
     override fun onResume() {
         super.onResume()
         if (bookId != -1) {
@@ -88,7 +101,17 @@ class BookDetailsActivity : AppCompatActivity() {
                 bookDetailsBinding.ratingBar.rating = book!!.rating.toFloat()
                 bookDetailsBinding.readSwitch.isChecked = book!!.read
                 bookDetailsBinding.wishlistSwitch.isChecked = book!!.wishlist
+
+                // pull the cover image from the database as a string and convert it to a bitmap
+                // then set the bitmap as the cover image
+                coverImageAsString = book!!.coverImageAsString
+                val coverAsBitmap = ConvertImage.convertToBitmap(coverImageAsString)
+
+                bookDetailsBinding.coverImageView.setImageBitmap(coverAsBitmap)
             }
+
+        } else {
+            finish()
         }
     }
 }

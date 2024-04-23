@@ -1,14 +1,21 @@
 package com.example.bibliocat.view
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +39,8 @@ class EditBookActivity : AppCompatActivity() {
     // Initialize the bookId to -1, which is an invalid id
     private var bookId = -1
 
+    private lateinit var activityResultLauncherForSelectImage: ActivityResultLauncher<Intent>
+    private lateinit var selectedImage: Bitmap
     private lateinit var coverImage: Bitmap
     private var coverImageAsString: String = ""
     private var book: Book? = null
@@ -50,7 +59,7 @@ class EditBookActivity : AppCompatActivity() {
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
 
         // register the activity for selecting an image
-//        registerActivityForSelectImage()
+        registerActivityForSelectImage()
 
         // Get the data for the book with the given bookId
         getAndSetData(bookId)
@@ -59,7 +68,8 @@ class EditBookActivity : AppCompatActivity() {
         editBookBinding.saveButton.setOnClickListener {
 
             // Check if the title and author fields are empty
-            val nogo = editBookBinding.titleEditText.text.isEmpty() || editBookBinding.authorEditText.text.isEmpty()
+            val nogo =
+                editBookBinding.titleEditText.text.isEmpty() || editBookBinding.authorEditText.text.isEmpty()
 
             if (nogo) {
                 Toast.makeText(
@@ -111,6 +121,43 @@ class EditBookActivity : AppCompatActivity() {
         // Set the onClickListener for the back button
         editBookBinding.backButton.setOnClickListener {
             finish()
+        }
+
+        // set the onClickListener for the cover image
+        editBookBinding.coverImageView.setOnClickListener {
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_photo_options, null)
+
+            val alertDialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create()
+
+            dialogView.findViewById<Button>(R.id.selectPhotoBtn).setOnClickListener {
+                // Implement selecting photo from device
+                alertDialog.dismiss()
+
+                //access the images
+                val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                //startActivityForResult -> Before API 30
+                activityResultLauncherForSelectImage.launch(intent)
+
+            }
+
+            dialogView.findViewById<Button>(R.id.takePhotoBtn).setOnClickListener {
+                // Implement taking photo
+                alertDialog.dismiss()
+            }
+
+            dialogView.findViewById<Button>(R.id.searchInternetBtn).setOnClickListener {
+                // Implement searching the internet for a photo
+                alertDialog.dismiss()
+            }
+
+            dialogView.findViewById<Button>(R.id.backBtn).setOnClickListener {
+                alertDialog.dismiss()
+                finish()
+            }
+
+            alertDialog.show()
         }
 
         // Set the onClickListener for the genre TextView
@@ -168,6 +215,7 @@ class EditBookActivity : AppCompatActivity() {
         }
     }
 
+
     private fun getAndSetData(bookId: Int) {
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -218,5 +266,35 @@ class EditBookActivity : AppCompatActivity() {
 
     fun updateGenre(genre: String) {
         editBookBinding.genreEditText.setText(genre)
+    }
+
+    private fun registerActivityForSelectImage() {
+
+        activityResultLauncherForSelectImage =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+                //result of the intent
+                val resultCode = result.resultCode
+                val imageData = result.data
+
+                if (resultCode == RESULT_OK && imageData != null) {
+
+                    val imageUri = imageData.data
+
+                    imageUri?.let {
+                        selectedImage = if (Build.VERSION.SDK_INT >= 28) {
+
+                            val imageSource = ImageDecoder.createSource(this.contentResolver, it)
+                            ImageDecoder.decodeBitmap(imageSource)
+
+                        } else {
+                            MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+                        }
+
+                        editBookBinding.coverImageView.setImageBitmap(selectedImage)
+                        control = true
+                    }
+                }
+            }
     }
 }

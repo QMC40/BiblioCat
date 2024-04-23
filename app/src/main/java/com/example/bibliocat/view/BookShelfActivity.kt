@@ -191,4 +191,15 @@ class BookShelfActivity : AppCompatActivity() {
     }
 }
 
+/*
+Sorting Option: Allow users to sort their bookshelf based on different criteria such as title, author, date added, or reading status.
+Filtering Option: Implement a feature that allows users to filter their bookshelf. For example, they could choose to only view books they have finished reading, books they are currently reading, or books they want to read.
+Search Functionality: Add a search bar at the top of the activity. This would allow users to quickly find a specific book by typing in its title or author.
+Book Details: When a user clicks on a book, open a new activity or fragment that displays more information about the book, such as its synopsis, publication date, and rating.
+Reading Progress: For each book, allow users to input and track their reading progress (e.g., the page number they are currently on).
+Recommendations: Based on the books in their bookshelf, provide users with recommendations for other books they might enjoy.
+Backup and Restore: Allow users to backup their bookshelf data and restore it if needed. This could be done using cloud storage.
+Sharing Option: Allow users to share their favorite books on social media or with friends through other apps.
+ */
+
 
