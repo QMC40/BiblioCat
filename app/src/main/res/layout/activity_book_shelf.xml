@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:orientation="vertical"
-    android:padding="5dp"
-    tools:context=".WishlistActivity">
+    android:padding="5dp">
 
     <TextView
-        android:id="@+id/wishlistBooksCounterTextView"
+        android:id="@+id/counterTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/books_wanted"
+        android:text="@string/books_read"
         android:textSize="30sp" />
 
     <Button
@@ -22,6 +20,11 @@
         style="@style/ButtonStyle1"
         android:text="@string/back"
         android:layout_gravity="center"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/emptyView"
@@ -41,6 +44,5 @@
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:visibility="gone"/>
-
 
 </LinearLayout>

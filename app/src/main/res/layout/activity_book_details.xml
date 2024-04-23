@@ -16,9 +16,8 @@
             android:layout_height="180dp"
             android:layout_gravity="center"
             android:contentDescription="@string/book_cover_image"
-            android:visibility="visible"
             android:scaleType="fitXY"
-            android:src="@drawable/madkatcvr" />
+            android:src="@drawable/madkat" />
 
         <GridLayout
             android:layout_width="match_parent"
@@ -32,8 +31,8 @@
                 android:textStyle="bold"
                 android:clickable="false"/>
 
-            <EditText
-                android:id="@+id/titleEditText"
+            <TextView
+                android:id="@+id/titleTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/title"
                 tools:ignore="Autofill"/>
@@ -43,8 +42,8 @@
                 android:text="@string/authorLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/authorEditText"
+            <TextView
+                android:id="@+id/authorTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/author"
                 tools:ignore="Autofill" />
@@ -53,20 +52,18 @@
                 style="@style/ColumnDisplayStyle1"
                 android:text="@string/genreLabel" />
 
-            <EditText
-                android:id="@+id/genreEditText"
+            <TextView
+                android:id="@+id/genreTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/genre"
-                android:clickable="true"
-                android:focusable="false"
                 tools:ignore="Autofill" />
 
             <TextView
                 style="@style/ColumnDisplayStyle1"
                 android:text="@string/isbnLabel" />
 
-            <EditText
-                android:id="@+id/isbnEditText"
+            <TextView
+                android:id="@+id/isbnTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/isbn"
                 tools:ignore="Autofill" />
@@ -75,28 +72,28 @@
                 style="@style/ColumnDisplayStyle1"
                 android:text="@string/pubLabel" />
 
-            <EditText
-                android:id="@+id/publisherEditText"
+            <TextView
+                android:id="@+id/publisherTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/publisher"
                 tools:ignore="Autofill" />
 
             <TextView
                 style="@style/ColumnDisplayStyle1"
-                android:text="@string/editionLabel" />
+                android:text="@string/genreLabel" />
 
-            <EditText
-                android:id="@+id/editionEditText"
+            <TextView
+                android:id="@+id/editionTextView"
                 style="@style/ColumnDisplayStyle2"
-                android:hint="@string/edition"
+                android:hint="@string/editionLabel"
                 tools:ignore="Autofill" />
 
             <TextView
                 style="@style/ColumnDisplayStyle1"
                 android:text="@string/pageLabel" />
 
-            <EditText
-                android:id="@+id/pagesEditText"
+            <TextView
+                android:id="@+id/pagesTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/pages"
                 tools:ignore="Autofill" />
@@ -105,8 +102,8 @@
                 style="@style/ColumnDisplayStyle1"
                 android:text="@string/yearLabel" />
 
-            <EditText
-                android:id="@+id/yearEditText"
+            <TextView
+                android:id="@+id/yearTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/year"
                 tools:ignore="Autofill" />
@@ -115,8 +112,8 @@
                 style="@style/ColumnDisplayStyle1"
                 android:text="@string/priceLabel" />
 
-            <EditText
-                android:id="@+id/priceEditText"
+            <TextView
+                android:id="@+id/priceTextView"
                 style="@style/ColumnDisplayStyle2"
                 android:hint="@string/price"
                 tools:ignore="Autofill" />
@@ -138,7 +135,7 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 android:numStars="5"
                 android:rating="3.0"
                 android:stepSize="0.5" />
@@ -160,6 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="false"
                 android:minHeight="48dp"
                 android:paddingRight="15dp"
                 android:text="@string/read"
@@ -171,6 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="false"
                 android:minHeight="48dp"
                 android:text="@string/wishlist"
                 android:textColor="#546E7A"
@@ -181,22 +180,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/saveButton"
+                android:id="@+id/editBtn"
                 style="@style/ButtonStyle1"
-                android:text="@string/save" />
+                android:text="@string/edit" />
 
             <Button
-                android:id="@+id/backButton"
+                android:id="@+id/deleteBtn"
+                style="@style/ButtonStyle1"
+                android:text="@string/delete" />
+
+            <Button
+                android:id="@+id/backBtn"
                 style="@style/ButtonStyle1"
                 android:text="@string/back" />
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </ScrollView>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#00000000"
+    android:padding="5dp">
+
+    <LinearLayout
+        style="@style/ButtonFieldStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/takePhotoBtn"
+                style="@style/ButtonStyle2"
+                android:layout_weight="1"
+                android:text="@string/take_photo"
+                app:layout_gravity="center" />
+
+            <Button
+                android:id="@+id/selectPhotoBtn"
+                style="@style/ButtonStyle2"
+                android:layout_weight="1"
+                android:text="@string/select_photo"
+                app:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/searchInternetBtn"
+                style="@style/ButtonStyle2"
+                android:layout_weight="1"
+                android:text="@string/internet_search"
+                app:layout_gravity="center" />
+
+            <Button
+                android:id="@+id/backBtn"
+                style="@style/ButtonStyle2"
+                android:layout_weight="1"
+                android:text="@string/back"
+                app:layout_gravity="center" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="379dp"
+            android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:contentDescription="@string/cute_kat_sorting_books"
+            android:scaleType="fitCenter"
+            android:src="@drawable/slypurplekat" />
+
+    </LinearLayout>
+
+</LinearLayout>

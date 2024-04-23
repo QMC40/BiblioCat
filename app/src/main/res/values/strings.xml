@@ -8,7 +8,6 @@
     <string name="outside_my_collection">Outside my Collection</string>
     <string name="share">Share Collection</string>
     <string name="bookshelf">Bookshelf</string>
-    <string name="whatAmIReading">What am I reading?</string>
     <string name="wishlist">Wishlist</string>
     <string name="find_books">Find a book</string>
     <string name="what_i_read">what I read</string>
@@ -28,8 +27,8 @@
     <string name="price">Price Paid</string>
     <string name="add_book">Add Book</string>
     <string name="delete">Delete book</string>
-    <string name="edit">Edit</string>
-    <string name="save">Save</string>
+    <string name="edit">Edit book</string>
+    <string name="save">Save changes</string>
     <string name="add_a_book_to_wishlist">add a book to the wishlist</string>
     <string name="wishlist_toggle">Wishlist</string>
     <string name="book_cover">Book cover</string>
@@ -37,11 +36,44 @@
     <string name="rating">Rating</string>
     <string name="book_cover_image" />
     <string name="cover_image">Cover Image</string>
-    <plurals name="book_count_format">
+    <string name="no_books_to_display">No books to display</string>
+    <string name="no_books_read">No books read yet</string>
+    <string name="books_read">Books Read</string>
+    <string name="books_wanted">Books Wanted</string>
+    <string name="books_collected">Books Collected</string>
+    <string name="search_results">Search Results</string>
+    <string name="search_for_a_book">Search for a book</string>
+    <string name="search">Search</string>
+    <string name="update_book">Update Book</string>
+    <string name="back">Back</string>
+    <string name="titleLabel">Title:</string>
+    <string name="authorLabel">Author:</string>
+    <string name="genreLabel">Genre:</string>
+    <string name="isbnLabel">ISBN:</string>
+    <string name="editionLabel">Edition:</string>
+    <string name="pageLabel">Pages:</string>
+    <string name="yearLabel">Year:</string>
+    <string name="priceLabel">Price:</string>
+    <string name="pubLabel">Publisher:</string>
+    <string name="ratingLabel">Rating:</string>
+    <plurals name="shelf_format">
         <item quantity="one">%1$d book in collection</item>
         <item quantity="other">%1$d books in collection</item>
     </plurals>
+    <plurals name="wishlist_format">
+        <item quantity="one">%1$d book in wishlist</item>
+        <item quantity="other">%1$d books in wishlist</item>
+    </plurals>
+    <plurals name="book_read_format">
+        <item quantity="one">%1$d book read</item>
+        <item quantity="other">%1$d books read</item>
+    </plurals>
+    <plurals name="book_found_format">
+        <item quantity="one">%1$d book found</item>
+        <item quantity="other">%1$d books found</item>
+    </plurals>
     <string-array name="genre_array">
+        <item>"nothing selected"</item>
         <item>Non-Fiction</item>
         <item>Fiction</item>
         <item>Fantasy</item>
@@ -56,4 +88,7 @@
         <item>Travel</item>
         <!-- Add more genres here -->
     </string-array>
+    <string name="take_photo">Take Photo</string>
+    <string name="select_photo">Select Photo</string>
+    <string name="internet_search">Internet Search</string>
 </resources>
