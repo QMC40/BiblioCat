@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ShareActivity::class.java)
         startActivity(intent)
     }
+
     private fun openWishlistActivity(view: View) {
         // Handle wishlistBtn click
         val intent = Intent(this, BookShelfActivity::class.java)

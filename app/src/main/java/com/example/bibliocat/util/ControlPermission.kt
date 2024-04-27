@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 class ControlPermission {
 
     companion object{
-        fun checkPermission(context: Context) : Boolean{
+        fun checkMediaPermission(context: Context) : Boolean{
 
             return if (Build.VERSION.SDK_INT >= 33){
                 ContextCompat.checkSelfPermission(
@@ -22,6 +22,13 @@ class ControlPermission {
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED
             }
+        }
+
+        fun checkCameraPermission(context: Context) : Boolean{
+            return ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
         }
     }
 }

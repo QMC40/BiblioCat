@@ -53,7 +53,6 @@ class AddBooksActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    // TODO: remove and refactor to click on the image in the edit activity to change the cover
     fun getCover(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.add_book_fragment_container, CameraFragment())

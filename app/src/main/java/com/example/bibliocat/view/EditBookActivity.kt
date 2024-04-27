@@ -1,12 +1,12 @@
 package com.example.bibliocat.view
 
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
@@ -15,7 +15,6 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
@@ -44,7 +43,6 @@ class EditBookActivity : AppCompatActivity() {
     private lateinit var coverImage: Bitmap
     private var coverImageAsString: String = ""
     private var book: Book? = null
-    private var control = false
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,9 +55,6 @@ class EditBookActivity : AppCompatActivity() {
 
         // get bookviewmodel instance
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
-
-        // register the activity for selecting an image
-        registerActivityForSelectImage()
 
         // Get the data for the book with the given bookId
         getAndSetData(bookId)
@@ -125,7 +120,9 @@ class EditBookActivity : AppCompatActivity() {
 
         // set the onClickListener for the cover image
         editBookBinding.coverImageView.setOnClickListener {
-            val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_photo_options, null)
+
+            val dialogView = LayoutInflater.from(this)
+                .inflate(R.layout.dialog_photo_options, null)
 
             val alertDialog = AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -135,16 +132,33 @@ class EditBookActivity : AppCompatActivity() {
                 // Implement selecting photo from device
                 alertDialog.dismiss()
 
-                //access the images
-                val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                // access the images
+                val intent =
+                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 //startActivityForResult -> Before API 30
                 activityResultLauncherForSelectImage.launch(intent)
 
             }
 
             dialogView.findViewById<Button>(R.id.takePhotoBtn).setOnClickListener {
+
+                Log.d("EditBookActivity", "Take Photo Button Clicked")
                 // Implement taking photo
                 alertDialog.dismiss()
+
+                // Create an intent to open the camera and set up to receive the image back
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                // Check if there is a camera app to handle the intent
+                try {
+                    // Start the camera activity and wait for the result if there is a camera app
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                    // If there is no camera app, catch the exception and display an error message to the user
+                } catch (e: ActivityNotFoundException) {
+                    // Display error state to the user
+                    Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
             }
 
             dialogView.findViewById<Button>(R.id.searchInternetBtn).setOnClickListener {
@@ -215,7 +229,6 @@ class EditBookActivity : AppCompatActivity() {
         }
     }
 
-
     private fun getAndSetData(bookId: Int) {
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -268,33 +281,21 @@ class EditBookActivity : AppCompatActivity() {
         editBookBinding.genreEditText.setText(genre)
     }
 
-    private fun registerActivityForSelectImage() {
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-        activityResultLauncherForSelectImage =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        // Check if the request code is for the camera
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            // Get the image from the data intent
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            // Set the image to the ImageView
+            editBookBinding.coverImageView.setImageBitmap(imageBitmap)
+        }
+    }
 
-                //result of the intent
-                val resultCode = result.resultCode
-                val imageData = result.data
-
-                if (resultCode == RESULT_OK && imageData != null) {
-
-                    val imageUri = imageData.data
-
-                    imageUri?.let {
-                        selectedImage = if (Build.VERSION.SDK_INT >= 28) {
-
-                            val imageSource = ImageDecoder.createSource(this.contentResolver, it)
-                            ImageDecoder.decodeBitmap(imageSource)
-
-                        } else {
-                            MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
-                        }
-
-                        editBookBinding.coverImageView.setImageBitmap(selectedImage)
-                        control = true
-                    }
-                }
-            }
+    companion object {
+        const val REQUEST_IMAGE_CAPTURE = 1
+        const val CAMERA_REQUEST_CODE = 2
     }
 }

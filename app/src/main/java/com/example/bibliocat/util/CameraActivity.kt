@@ -1,7 +1,6 @@
 package com.example.bibliocat.util
 
 import android.Manifest
-import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,19 +9,16 @@ import android.os.Bundle
 import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.example.bibliocat.R
 import com.example.bibliocat.view.EditBookActivity
 import java.io.ByteArrayOutputStream
 
-class CameraFragment : Fragment() {
+class CameraActivity : AppCompatActivity() {
 
     private lateinit var imageView: ImageView
 
@@ -30,20 +26,18 @@ class CameraFragment : Fragment() {
         const val REQUEST_IMAGE_CAPTURE = 1
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.activity_camera, container, false)
-        imageView = view.findViewById(R.id.imageView)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_camera)
+        imageView = findViewById(R.id.imageView)
         // Check for camera permission and request it if not granted yet
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
+                this,
                 Manifest.permission.CAMERA
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                requireActivity(),
+                this,
                 arrayOf(Manifest.permission.CAMERA),
                 100
             )
@@ -51,7 +45,6 @@ class CameraFragment : Fragment() {
             // Permission has already been granted so open the camera directly
             openCamera()
         }
-        return view
     }
 
     private fun openCamera() {
@@ -64,13 +57,14 @@ class CameraFragment : Fragment() {
         // If there is no camera app, catch the exception and display an error message to the user
         } catch (e: ActivityNotFoundException) {
             // Display error state to the user
-            Log.d("com.example.bibliocat.util.CameraFragment", "No camera app found")
-            Toast.makeText(context, "No camera app found", Toast.LENGTH_SHORT).show()
+            Log.d("com.example.bibliocat.util.CameraActivity", "No camera app found")
+            Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show()
         }
     }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         // Check if the request to open the camera was successful and the image was captured and returned
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Get the image data from the intent and display it in the image view on the screen
@@ -86,9 +80,8 @@ class CameraFragment : Fragment() {
             processedImage.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
             // Convert the compressed image to a byte array
             val byteArray = byteArrayOutputStream.toByteArray()
-
             // open a new book edit activity with the image data
-            val intent = Intent(context, EditBookActivity::class.java)
+            val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra("image", byteArray)
             startActivity(intent)
         }
@@ -97,7 +90,7 @@ class CameraFragment : Fragment() {
     private fun processImage(bitmap: Bitmap): Bitmap {
         // Get the display metrics of the device
         val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
         // Set the desired image size for display
         val imageSize = (120 * displayMetrics.density).toInt()
         // Scale the image to the desired size
@@ -110,11 +103,12 @@ class CameraFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // Check if the camera permission was granted and open the camera if it was
         if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             openCamera()
         } else {
-            Log.d("com.example.bibliocat.util.CameraFragment", "Permission denied")
+            Log.d("com.example.bibliocat.util.CameraActivity", "Permission denied")
         }
     }
 }
