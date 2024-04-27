@@ -85,7 +85,9 @@ class MainActivity : AppCompatActivity() {
 
     fun openAddBooksActivity(view: View) {
         // Handle addBooksBtn click
-        val intent = Intent(this, AddBooksActivity::class.java)
+        // Start the EditBookActivity in add mode
+        val intent = Intent(this, EditBookActivity::class.java)
+        intent.putExtra("bookId", -1)
         startActivity(intent)
     }
 
