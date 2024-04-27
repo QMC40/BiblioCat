@@ -99,6 +99,7 @@
         <Button
             android:id="@+id/shareBtn"
             style="@style/ButtonStyle1"
+            android:textColor="#C198FA"
             android:text="@string/share"
             app:layout_gravity="center"/>
 

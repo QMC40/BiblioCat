@@ -5,6 +5,7 @@ package com.example.bibliocat.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -100,8 +101,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun openShareActivity(view: View) {
         // Handle shareBtn click
-        val intent = Intent(this, ShareActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, ShareActivity::class.java)
+//        startActivity(intent)
+
+        // make a toast to show that the activity is not implemented yet
+        // and will be implemented in the future
+        val toast = Toast.makeText(applicationContext, "This activity is not implemented yet",
+            Toast.LENGTH_SHORT).show()
     }
 
     private fun openWishlistActivity(view: View) {
