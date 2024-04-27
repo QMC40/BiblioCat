@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -15,6 +17,7 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +28,6 @@ import com.example.bibliocat.model.Book
 import com.example.bibliocat.util.ConvertImage
 import com.example.bibliocat.viewmodel.BookViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,14 +38,15 @@ class EditBookActivity : AppCompatActivity() {
     private lateinit var editBookBinding: ActivityEditBookBinding
     private lateinit var bookViewModel: BookViewModel
     private lateinit var activityResultLauncherForSelectImage: ActivityResultLauncher<Intent>
+    private lateinit var selectedImage: Bitmap
     private lateinit var coverImage: Bitmap
     private var coverImageAsString: String = ""
     private var book: Book? = null
+    private var control = false
 
     // Initialize the bookId to -1, which is an invalid id
     private var bookId = -1
 
-    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         editBookBinding = ActivityEditBookBinding.inflate(layoutInflater)
@@ -54,6 +57,9 @@ class EditBookActivity : AppCompatActivity() {
 
         // get bookviewmodel instance
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
+
+        // register the activity for selecting an image
+        registerActivityForSelectImage()
 
         // Get the data for the book with the given bookId
         getAndSetData(bookId)
@@ -293,7 +299,7 @@ class EditBookActivity : AppCompatActivity() {
                 editBookBinding.ratingBar.rating = 0.0f
                 editBookBinding.readSwitch.isChecked = false
                 editBookBinding.wishlistSwitch.isChecked = false
-                editBookBinding.coverImageView.setImageResource(R.drawable.madkatcvr)
+                editBookBinding.coverImageView.setImageResource(R.drawable.madkatsel)
             }
         }
     }
@@ -303,7 +309,36 @@ class EditBookActivity : AppCompatActivity() {
         editBookBinding.genreEditText.setText(genre)
     }
 
-    // method to update the cover image using the camera
+    private fun registerActivityForSelectImage() {
+
+        activityResultLauncherForSelectImage =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+                //result of the intent
+                val resultCode = result.resultCode
+                val imageData = result.data
+
+                if (resultCode == RESULT_OK && imageData != null) {
+
+                    val imageUri = imageData.data
+
+                    imageUri?.let {
+                        selectedImage = if (Build.VERSION.SDK_INT >= 28) {
+
+                            val imageSource = ImageDecoder.createSource(this.contentResolver, it)
+                            ImageDecoder.decodeBitmap(imageSource)
+
+                        } else {
+                            MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
+                        }
+
+                        editBookBinding.coverImageView.setImageBitmap(selectedImage)
+                        control = true
+                    }
+                }
+            }
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -319,5 +354,6 @@ class EditBookActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_IMAGE_CAPTURE = 1
+        const val CAMERA_REQUEST_CODE = 2
     }
 }

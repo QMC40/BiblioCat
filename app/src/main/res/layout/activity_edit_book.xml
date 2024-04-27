@@ -18,7 +18,7 @@
             android:contentDescription="@string/book_cover_image"
             android:visibility="visible"
             android:scaleType="fitXY"
-            android:src="@drawable/madkatcvr" />
+            android:src="@drawable/madkatsel" />
 
         <GridLayout
             android:layout_width="match_parent"
