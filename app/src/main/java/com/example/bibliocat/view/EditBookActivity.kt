@@ -161,10 +161,10 @@ class EditBookActivity : AppCompatActivity() {
                 }
             }
 
-            dialogView.findViewById<Button>(R.id.searchInternetBtn).setOnClickListener {
-                // Implement searching the internet for a photo
-                alertDialog.dismiss()
-            }
+//            dialogView.findViewById<Button>(R.id.searchInternetBtn).setOnClickListener {
+//                // Implement searching the internet for a photo
+//                alertDialog.dismiss()
+//            }
 
             dialogView.findViewById<Button>(R.id.backBtn).setOnClickListener {
                 alertDialog.dismiss()
