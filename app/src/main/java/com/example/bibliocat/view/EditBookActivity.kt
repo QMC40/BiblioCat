@@ -354,6 +354,5 @@ class EditBookActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_IMAGE_CAPTURE = 1
-        const val CAMERA_REQUEST_CODE = 2
     }
 }
