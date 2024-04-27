@@ -47,12 +47,12 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/searchInternetBtn"
-                style="@style/ButtonStyle2"
-                android:layout_weight="1"
-                android:text="@string/internet_search"
-                app:layout_gravity="center" />
+<!--            <Button-->
+<!--                android:id="@+id/searchInternetBtn"-->
+<!--                style="@style/ButtonStyle2"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="@string/internet_search"-->
+<!--                app:layout_gravity="center" />-->
 
             <Button
                 android:id="@+id/backBtn"
