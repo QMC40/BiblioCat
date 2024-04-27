@@ -14,11 +14,11 @@ import com.example.bibliocat.adapter.BookAdapter
 import com.example.bibliocat.databinding.ActivityMainBinding
 import com.example.bibliocat.viewmodel.BookViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+    // set vars
     private lateinit var bookViewModel: BookViewModel
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var bookAdapter: BookAdapter
@@ -29,10 +29,13 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
+        // set the bookViewModel for the activity
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
 
+        // clear any text in the search field
         mainBinding.searchField.text.clear()
 
+        // set the onClickListeners for the buttons
         mainBinding.searchBtn.setOnClickListener {
             val searchQuery = mainBinding.searchField.text.toString()
             if (searchQuery.isEmpty()) {
@@ -65,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             openShareActivity(it)
         }
 
+        // get the book count in a coroutine and set the text view to the count
         lifecycleScope.launch {
             val count = bookViewModel.getTotalCount()
             mainBinding.bookCounterTextView.text =
@@ -72,10 +76,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onResume() {
         super.onResume()
-        // Refresh the book count
-        GlobalScope.launch {
+        // Refresh the book count in a coroutine and set the text view to the count
+        lifecycleScope.launch {
             val count = bookViewModel.getTotalCount()
             mainBinding.bookCounterTextView.text =
                 resources.getQuantityString(R.plurals.shelf_format, count, count)
@@ -94,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openBookShelfActivity(view: View) {
         // Handle bookshelfBtn click
+        // Start the BookShelfActivity with the bookshelf button
         val intent = Intent(this, BookShelfActivity::class.java)
         intent.putExtra("button", "bookshelf")
         startActivity(intent)
@@ -125,7 +131,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchForBooks(searchQuery: String) {
+        // Handle searchBtn click
         val intent = Intent(this, BookShelfActivity::class.java)
+        // Send the search query to the BookShelfActivity as an extra as well as
+        // tagging the intent with the button that was clicked to get to the search
+        // display items
         intent.putExtra("button", "search")
         intent.putExtra("searchQuery", searchQuery)
         startActivity(intent)

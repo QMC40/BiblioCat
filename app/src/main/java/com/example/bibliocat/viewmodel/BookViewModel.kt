@@ -10,16 +10,20 @@ import com.example.bibliocat.repository.MyBookRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+// This class is used to interact with the repository and the UI
 class BookViewModel(application: Application) : AndroidViewModel(application) {
 
+    // set vars
     private var repository: MyBookRepository
     private var bookList: LiveData<List<Book>>
 
+    // init the repository and get all the books
     init {
         repository = MyBookRepository(application)
         bookList = repository.getAllCollection()
     }
 
+    // insert, update, and delete functions
     fun insert(book: Book) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(book)
     }

@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.bibliocat.R
 import com.example.bibliocat.databinding.ActivityEditBookBinding
 import com.example.bibliocat.model.Book
@@ -26,23 +27,21 @@ import com.example.bibliocat.viewmodel.BookViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class EditBookActivity : AppCompatActivity() {
 
+    // Declare variables for the binding and the ViewModel
     private lateinit var editBookBinding: ActivityEditBookBinding
     private lateinit var bookViewModel: BookViewModel
-
-    // Initialize the bookId to -1, which is an invalid id
-    private var bookId = -1
-
     private lateinit var activityResultLauncherForSelectImage: ActivityResultLauncher<Intent>
-    private lateinit var selectedImage: Bitmap
     private lateinit var coverImage: Bitmap
     private var coverImageAsString: String = ""
     private var book: Book? = null
+
+    // Initialize the bookId to -1, which is an invalid id
+    private var bookId = -1
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,9 +61,11 @@ class EditBookActivity : AppCompatActivity() {
         // Set the onClickListener for the save button
         editBookBinding.saveButton.setOnClickListener {
 
-            // Check if the title and author fields are empty
+            // Check if the title and author fields are empty, prevent saving if they are and
+            // display a toast message to the user
             val nogo =
-                editBookBinding.titleEditText.text.isEmpty() || editBookBinding.authorEditText.text.isEmpty()
+                editBookBinding.titleEditText.text.isEmpty()
+                        || editBookBinding.authorEditText.text.isEmpty()
 
             if (nogo) {
                 Toast.makeText(
@@ -75,10 +76,12 @@ class EditBookActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            GlobalScope.launch(Dispatchers.IO) {
+            // Save the book to the database in a coroutine
+            lifecycleScope.launch(Dispatchers.IO) {
                 // convert the cover image to a string to store in the database
                 coverImage = editBookBinding.coverImageView.drawable.toBitmap()
                 coverImageAsString = ConvertImage.convertToString(coverImage).toString()
+
                 // Create a new book object with the values from the form
                 book = Book(
                     title = editBookBinding.titleEditText.text.toString(),
@@ -96,6 +99,8 @@ class EditBookActivity : AppCompatActivity() {
                     coverImageAsString = coverImageAsString
                 )
 
+                // Set the message to display to the user depending on whether editing or adding a
+                // book
                 val msg = if (bookId != -1) "Book updated" else "Book added"
 
                 // If the user is editing a book, update the book in the database
@@ -118,9 +123,11 @@ class EditBookActivity : AppCompatActivity() {
             finish()
         }
 
-        // set the onClickListener for the cover image
+        // set the onClickListener for the cover image so the user can click on the image to change
+        // it by either taking a photo or selecting a photo from the device gallery
         editBookBinding.coverImageView.setOnClickListener {
 
+            // Create a dialog to allow the user to select a photo from the device or take a photo
             val dialogView = LayoutInflater.from(this)
                 .inflate(R.layout.dialog_photo_options, null)
 
@@ -128,6 +135,7 @@ class EditBookActivity : AppCompatActivity() {
                 .setView(dialogView)
                 .create()
 
+            // Set the onClickListeners for the buttons in the dialog
             dialogView.findViewById<Button>(R.id.selectPhotoBtn).setOnClickListener {
                 // Implement selecting photo from device
                 alertDialog.dismiss()
@@ -174,12 +182,16 @@ class EditBookActivity : AppCompatActivity() {
             alertDialog.show()
         }
 
-        // Set the onClickListener for the genre TextView
+        // Set the onClickListener for the genre TextView to allow selection of genre from the list
         editBookBinding.genreEditText.setOnClickListener {
             val dialogView =
                 LayoutInflater.from(this).inflate(R.layout.dialog_genre_select, null)
+
+            // Create a Spinner to allow the user to select a genre
             val genreDialogSpinner = dialogView.findViewById<Spinner>(R.id.dialogGenreSpinner)
 
+            // Create an ArrayAdapter to populate the Spinner with the genre list from the resources
+            // and set the adapter for the Spinner with the genre list
             val adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.genre_array,
@@ -196,13 +208,18 @@ class EditBookActivity : AppCompatActivity() {
             // Set the selected item of the Spinner to the current genre
             genreDialogSpinner.setSelection(genreIndex)
 
+            // Create an AlertDialog to display the genre selection dialog
             val genreDialog = AlertDialog.Builder(this)
                 .setTitle("Select Genre")
                 .setView(dialogView)
                 .create()
 
+            // set a flag to determine if the first selection is the default value to avoid missing
+            // the first selection when the dialog is opened
             var isFirstSelection = true
 
+            // Set the onItemSelectedListener for the Spinner to update the genre in the form when
+            // a genre is selected
             genreDialogSpinner.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
@@ -229,8 +246,12 @@ class EditBookActivity : AppCompatActivity() {
         }
     }
 
+    // Set the details of the book in the form fields when the activity is created, either the
+    // details of the book with the given bookId or the default values for a new book if the bookId
+    // is -1 and the user is adding a new book
     private fun getAndSetData(bookId: Int) {
 
+        // Get the book details in a coroutine to avoid blocking the main thread
         CoroutineScope(Dispatchers.IO).launch {
             if (bookId != -1) {
 
@@ -277,10 +298,12 @@ class EditBookActivity : AppCompatActivity() {
         }
     }
 
+    // method to update genre text using the spinner
     fun updateGenre(genre: String) {
         editBookBinding.genreEditText.setText(genre)
     }
 
+    // method to update the cover image using the camera
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -296,6 +319,5 @@ class EditBookActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_IMAGE_CAPTURE = 1
-        const val CAMERA_REQUEST_CODE = 2
     }
 }
