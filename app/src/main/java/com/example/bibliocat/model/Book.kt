@@ -3,7 +3,10 @@ package com.example.bibliocat.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
+// This class represents the Book entity in the database holding the details of the book and a
+// cover image as a string. The class is annotated with @Entity to specify the table name in the
+// database. The class also has a primary key field annotated with @PrimaryKey to specify the
+// primary key of the table.
 @Entity(tableName = "my_collection")
 data class Book(
 

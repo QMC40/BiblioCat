@@ -8,6 +8,8 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.bibliocat.model.Book
 
+// Data Access Object for MyCollection table in the database to allow interaction with the table
+// vaious database operations like insert, update, delete, select, etc. are defined here
 @Dao
 interface MyCollectionDao {
 

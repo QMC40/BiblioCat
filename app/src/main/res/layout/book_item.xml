@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title"
+                android:textColor="#6703F4"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:maxLines="2"
@@ -37,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/author"
+                android:textColor="#6703F4"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:maxLines="3"
@@ -53,7 +55,7 @@
             android:layout_margin="5dp"
             android:scaleType="fitXY"
             android:contentDescription="@string/book_cover"
-            android:src="@drawable/madkatcvr" />
+            android:src="@drawable/madkatsel" />
 
     </LinearLayout>
 
